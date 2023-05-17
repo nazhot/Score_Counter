@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import NavBar from "./components/NavBar";
+import ScoreContainer from './components/ScoreContainer';
+import BottomNav from './components/BottomNav';
+
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
       <NavBar
         winner="Maddie"
         >
@@ -14,7 +16,7 @@ export default function App() {
 
       </ScoreContainer>
       <BottomNav>
-        
+
       </BottomNav>
     </SafeAreaView>
   );
@@ -23,8 +25,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#f0a',
   },
 });
