@@ -5,12 +5,18 @@ const styles = StyleSheet.create({
     navbar: {
         backgroundColor: "#aaa",
         flex: 1,
-        alignContent: "center",
+        flexDirection: "row",
     },
     text: {
-        position: "absolute",
         color: "#000",
-        bottom: 0,
+        flex: 2,
+    },
+    spacer: {
+        flex: 4,
+        backgroundColor: "red",
+    },
+    icons: {
+        flex: 3,
     }
 });
 
@@ -20,6 +26,10 @@ const NavBar = ( {winner} ) => {
         style={styles.navbar}
         >
             <Text style={styles.text}>{winner}</Text>
+            <View style={styles.spacer}></View>
+            <View style={styles.icons}>
+
+            </View>
         </View>
     );
 };
