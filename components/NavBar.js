@@ -1,5 +1,11 @@
 import { React } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+
+const iconSize = 30;
+const textSize = 18;
+const iconColor = "#000"
+const containerPadding = 4;
 
 const styles = StyleSheet.create({
     navbar: {
@@ -7,16 +13,26 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
     },
-    text: {
+    winnerContainer: {
         color: "#000",
-        flex: 2,
+        flex: 2.5,
+        flexDirection: "row",
+        alignItems: "flex-end",
+        padding: containerPadding,
+    },
+    text: {
+        fontSize: textSize,
     },
     spacer: {
         flex: 4,
-        backgroundColor: "red",
     },
     icons: {
         flex: 3,
+        padding: containerPadding,
+        flexDirection: "row",
+        columnGap: 20,
+        alignItems: "flex-end",
+        justifyContent: "center",
     }
 });
 
@@ -25,10 +41,33 @@ const NavBar = ( {winner} ) => {
         <View
         style={styles.navbar}
         >
-            <Text style={styles.text}>{winner}</Text>
-            <View style={styles.spacer}></View>
-            <View style={styles.icons}>
+            <View style={styles.winnerContainer}>
+                <Text style={styles.text}>{winner}</Text>
+                <FontAwesome
+                    name="star"
+                    size={iconSize}
+                    color={iconColor}
+                />
+            </View>
 
+            <View style={styles.spacer}></View>
+
+            <View style={styles.icons}>
+                <FontAwesome
+                    name="plus"
+                    size={iconSize}
+                    color={iconColor}
+                />
+                <FontAwesome
+                    name="clock-o"
+                    size={iconSize}
+                    color={iconColor}
+                />
+                <FontAwesome
+                    name="ellipsis-h"
+                    size={iconSize}
+                    color={iconColor}
+                />
             </View>
         </View>
     );
