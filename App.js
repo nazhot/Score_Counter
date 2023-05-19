@@ -4,6 +4,17 @@ import NavBar from "./components/NavBar";
 import ScoreContainer from './components/ScoreContainer';
 import BottomNav from './components/BottomNav';
 
+const scoreData = [
+  {
+    player: "Maddie",
+    score: 1,
+  },
+  {
+    player: "Noah",
+    score: 2,
+  }
+];
+
 
 export default function App() {
   return (
@@ -12,7 +23,9 @@ export default function App() {
         winner="Maddie"
         >
       </NavBar>
-      <ScoreContainer>
+      <ScoreContainer
+        data={scoreData}
+      >
 
       </ScoreContainer>
       <BottomNav>

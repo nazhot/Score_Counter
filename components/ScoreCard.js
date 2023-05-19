@@ -4,16 +4,22 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: "25%",
         backgroundColor: "#3f1",
+        flex: 1,
+        flexDirection: "column",
     }, 
     title: {
         flex: 1,
+        backgroundColor: "lightblue",
+        flexDirection: "row",
     },
     scoreContainer: {
         flexDirection: "row",
         flex: 10,
         color: "fff",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
     },
     increment: {
         flex: 1,
@@ -34,15 +40,16 @@ const ScoreCard = ( {player, score} ) => {
                     name="edit"
                     size="30"
                     color="fff"
+                    style={{flex: 1, direction: "rtl"}}
                 />
             </View>
             <View style={styles.scoreContainer}>
                 <Text style={styles.increment}>-</Text>
-                <Text>{score}</Text>
+                <Text style={styles.score}>{score}</Text>
                 <Text style={styles.increment}>+</Text>
             </View>
         </View>
     );
 };
 
-
+export default ScoreCard;
