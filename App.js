@@ -20,6 +20,15 @@ export default function App() {
     ]
   );
 
+  let winner = "";
+  let winnerScore = 0;
+  for (let i = 0; i < scoreData.length; i++){
+    if (scoreData[i].score > winnerScore){
+      winner      = scoreData[i].name;
+      winnerScore = scoreData[i].score;
+    }
+  }
+
   function updateScoreData(index, newPlayerData){
     const newScoreData = [];
     for (let i = 0; i < scoreData.length; i++){
@@ -59,7 +68,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <NavBar
-        winner="Maddie"
+        winner={winner}
         >
       </NavBar>
       <ScoreContainer
