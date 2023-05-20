@@ -16,14 +16,17 @@ const styles = StyleSheet.create({
     scoreContainer: {
         flexDirection: "row",
         flex: 10,
-        color: "fff",
-        alignItems: "center",
+        color: "#fff",
+        alignItems: "stretch",
         justifyContent: "center",
         textAlign: "center",
     },
     increment: {
         flex: 1,
         fontSize: 10,
+        backgroundColor: "#FFA500",
+        alignItems: "center",
+        justifyContent: "center",
     },
     score: {
         flex: 9,
@@ -40,7 +43,7 @@ const ScoreCard = ( {player, score, updateScoreFunction} ) => {
                 <FontAwesome
                     name="edit"
                     size={30}
-                    color="fff"
+                    color="#fff"
                     style={{flex: 1, direction: "rtl"}}
                 />
             </View>
