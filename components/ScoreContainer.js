@@ -16,11 +16,12 @@ const styles = StyleSheet.create({
 function generateScoreCards(dataObject, updateScoreFunction){
     const scoreCards = [];
     let count = 0;
-    for ( const player in dataObject ) {
+    for ( const playerData of dataObject ) {
         scoreCards.push(
             <ScoreCard
-                player={player}
-                score={dataObject[player].score}
+                player={playerData.name}
+                score={playerData.score}
+                pos={count}
                 key={count}
                 updateScoreFunction={updateScoreFunction}
             />

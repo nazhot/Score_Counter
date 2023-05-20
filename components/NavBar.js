@@ -73,5 +73,4 @@ const NavBar = ( {winner} ) => {
     );
 };
 
-
 export default NavBar;

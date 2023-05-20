@@ -5,34 +5,38 @@ import ScoreContainer from './components/ScoreContainer';
 import BottomNav from './components/BottomNav';
 import { useState } from 'react';
 
-const scoreData = [
-
-];
-
-
 export default function App() {
 
   const [scoreData, setScoreData] = useState(
-    {
-      "Maddie": {
-        score: 1,
-      },
-      "Noah": {
+    [
+      {
+        name: "Maddie",
         score: 2,
+      },
+      {
+        name: "Noah",
+        score: 1,
       }
-    }
+    ]
   );
 
-  function updateScoreFunction(player, value) {
-    const playerData    = scoreData[player];
+  function updateScoreFunction(index, value) {
+    const playerData    = scoreData[index];
     const newScore      = playerData.score + value;
     const newPlayerData = {
       ...playerData,
       score: newScore,
     }
 
-    const newScoreData = {...scoreData}
-    newScoreData[player] = newPlayerData;
+    const newScoreData = [];
+
+    for (let i = 0; i < scoreData.length; i++) {
+      if ( i == index ) {
+        newScoreData.push(newPlayerData);
+      } else {
+        newScoreData.push(scoreData[i]);
+      }
+    }
 
     setScoreData(newScoreData);
   }

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const ScoreCard = ( {player, score, updateScoreFunction} ) => {
+const ScoreCard = ( {player, score, updateScoreFunction, pos} ) => {
     return (
         <View style={styles.container}>
             <View style={styles.title}>
@@ -49,14 +49,14 @@ const ScoreCard = ( {player, score, updateScoreFunction} ) => {
             </View>
             <View style={styles.scoreContainer}>
                 <Pressable 
-                onPress={() => updateScoreFunction(player, -1)}
+                onPress={() => updateScoreFunction(pos, -1)}
                 style={styles.increment}>
                     <Text >-</Text>
                 </Pressable>
 
                 <Text style={styles.score}>{score}</Text>
                 <Pressable 
-                onPress={() => updateScoreFunction(player, 1)}
+                onPress={() => updateScoreFunction(pos, 1)}
                 style={styles.increment}>
                     <Text>+</Text>
                 </Pressable>
