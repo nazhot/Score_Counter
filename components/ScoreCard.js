@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { React } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     }, 
     title: {
         flex: 1,
-        backgroundColor: "lightblue",
+        backgroundColor: "#add8e6",
         flexDirection: "row",
     },
     scoreContainer: {
@@ -28,25 +28,36 @@ const styles = StyleSheet.create({
     score: {
         flex: 9,
         fontSize: 30,
+        textAlign: "center",
     }
 });
 
-const ScoreCard = ( {player, score} ) => {
+const ScoreCard = ( {player, score, updateScoreFunction} ) => {
     return (
         <View style={styles.container}>
             <View style={styles.title}>
                 <Text style={{flex: 1}}>{player}</Text>
                 <FontAwesome
                     name="edit"
-                    size="30"
+                    size={30}
                     color="fff"
                     style={{flex: 1, direction: "rtl"}}
                 />
             </View>
             <View style={styles.scoreContainer}>
-                <Text style={styles.increment}>-</Text>
+                <Pressable 
+                onPress={() => updateScoreFunction(player, -1)}
+                style={styles.increment}>
+                    <Text >-</Text>
+                </Pressable>
+
                 <Text style={styles.score}>{score}</Text>
-                <Text style={styles.increment}>+</Text>
+                <Pressable 
+                onPress={() => updateScoreFunction(player, 1)}
+                style={styles.increment}>
+                    <Text>+</Text>
+                </Pressable>
+
             </View>
         </View>
     );
