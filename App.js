@@ -20,25 +20,39 @@ export default function App() {
     ]
   );
 
-  function updateScoreFunction(index, value) {
-    const playerData    = scoreData[index];
-    const newScore      = playerData.score + value;
-    const newPlayerData = {
-      ...playerData,
-      score: newScore,
-    }
-
+  function updateScoreData(index, newPlayerData){
     const newScoreData = [];
-
-    for (let i = 0; i < scoreData.length; i++) {
-      if ( i == index ) {
+    for (let i = 0; i < scoreData.length; i++){
+      if (i == index){
         newScoreData.push(newPlayerData);
-      } else {
+      } else{
         newScoreData.push(scoreData[i]);
       }
     }
 
     setScoreData(newScoreData);
+  }
+
+  function updateScoreFunction(index, incrementValue) {
+    const playerData    = scoreData[index];
+    const newScore      = playerData.score + incrementValue;
+    const newPlayerData = {
+      ...playerData,
+      score: newScore,
+    };
+
+    updateScoreData(index, newPlayerData);
+  }
+
+  function updateNameFunction(index) {
+    const newName       = "just a test";
+    const playerData    = scoreData[index];
+    const newPlayerData = {
+      ...playerData,
+      name: newName,
+    };
+
+    updateScoreData(index, newPlayerData);
   }
 
 
@@ -51,6 +65,7 @@ export default function App() {
       <ScoreContainer
         data={scoreData}
         updateScoreFunction={updateScoreFunction}
+        updateNameFunction={updateNameFunction}
       >
 
       </ScoreContainer>

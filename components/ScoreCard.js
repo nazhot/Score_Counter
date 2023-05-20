@@ -35,17 +35,22 @@ const styles = StyleSheet.create({
     }
 });
 
-const ScoreCard = ( {player, score, updateScoreFunction, pos} ) => {
+const ScoreCard = ( {player, score, updateScoreFunction, updateNameFunction, pos} ) => {
     return (
         <View style={styles.container}>
             <View style={styles.title}>
                 <Text style={{flex: 1}}>{player}</Text>
-                <FontAwesome
-                    name="edit"
-                    size={30}
-                    color="#fff"
-                    style={{flex: 1, direction: "rtl"}}
-                />
+                <Pressable
+                onPress={() => updateNameFunction(pos)}
+                style={{flex: 1, direction: "rtl"}}>
+                    <FontAwesome
+                        name="edit"
+                        size={30}
+                        color="#fff"
+                        
+                    />
+                </Pressable>
+ 
             </View>
             <View style={styles.scoreContainer}>
                 <Pressable 
