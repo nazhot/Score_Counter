@@ -12,10 +12,12 @@ export default function App() {
       {
         name: "Maddie",
         score: 2,
+        increment: 2,
       },
       {
         name: "Noah",
         score: 1,
+        increment: 3,
       }
     ]
   );
@@ -42,14 +44,23 @@ export default function App() {
     setScoreData(newScoreData);
   }
 
-  function updateScoreFunction(index, incrementValue) {
+  function updateScoreFunction(index, multiplier) {
     const playerData    = scoreData[index];
-    const newScore      = playerData.score + incrementValue;
+    const newScore      = playerData.score + (playerData.increment * multiplier);
     const newPlayerData = {
       ...playerData,
       score: newScore,
     };
 
+    updateScoreData(index, newPlayerData);
+  }
+
+  function updateIncrementFunction(index, newIncrement) {
+    const playerDatan   = scoreIndex[index];
+    const newPlayerData = {
+      ...scoreData,
+      increment: newIncrement,
+    }
     updateScoreData(index, newPlayerData);
   }
 
