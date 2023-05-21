@@ -75,11 +75,25 @@ export default function App() {
     updateScoreData(index, newPlayerData);
   }
 
+  function addNewPlayerAtEnd() {
+    const newScoreData = [...scoreData];
+    newScoreData.push(
+      {
+        name: "New Player",
+        score: 0,
+        increment: 1,
+      }
+    );
+
+    setScoreData(newScoreData);
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>
       <NavBar
         winner={winner}
+        addPlayer={addNewPlayerAtEnd}
         >
       </NavBar>
       <ScoreContainer

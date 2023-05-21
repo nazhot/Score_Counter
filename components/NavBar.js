@@ -1,5 +1,5 @@
 import { React } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 const iconSize = 30;
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const NavBar = ( {winner} ) => {
+const NavBar = ( {winner, addPlayer} ) => {
     return (
         <View
         style={styles.navbar}
@@ -53,11 +53,15 @@ const NavBar = ( {winner} ) => {
             <View style={styles.spacer}></View>
 
             <View style={styles.icons}>
-                <FontAwesome
-                    name="plus"
-                    size={iconSize}
-                    color={iconColor}
-                />
+                <Pressable
+                    onPress={addPlayer}
+                >
+                    <FontAwesome
+                        name="plus"
+                        size={iconSize}
+                        color={iconColor}
+                    />
+                </Pressable>
                 <FontAwesome
                     name="clock-o"
                     size={iconSize}
