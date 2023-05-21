@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
  * Using the given data, create the ScoreCard components that will be within this ScoreContainer
  * @param {Array} data Array of object that define the various players and their scores
  */
-function generateScoreCards(dataObject, updateScoreFunction, updateNameFunction){
+function generateScoreCards(dataObject, updateScoreFunction, updateNameFunction, goToPlayerScreen){
     const scoreCards = [];
     let count = 0;
     for ( const playerData of dataObject ) {
@@ -25,6 +25,7 @@ function generateScoreCards(dataObject, updateScoreFunction, updateNameFunction)
                 key={count}
                 updateScoreFunction={updateScoreFunction}
                 updateNameFunction={updateNameFunction}
+                goToPlayerScreen={goToPlayerScreen}
             />
         );
         count++;
@@ -33,12 +34,12 @@ function generateScoreCards(dataObject, updateScoreFunction, updateNameFunction)
 }
 
 
-const ScoreContainer = ( {data, updateScoreFunction, updateNameFunction} ) => {
+const ScoreContainer = ( {data, updateScoreFunction, updateNameFunction, goToPlayerScreen} ) => {
     return (
         <View
             style={styles.container}
         >
-            {generateScoreCards(data, updateScoreFunction, updateNameFunction)}
+            {generateScoreCards(data, updateScoreFunction, updateNameFunction, goToPlayerScreen)}
         </View>
     );
 };
