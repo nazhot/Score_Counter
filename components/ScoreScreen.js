@@ -6,8 +6,14 @@ import { useState } from 'react';
 
 const ScoreScreen = ( {navigation} ) => {
 
-    const goToPlayerScreen = (player, index) => {
-        navigation.navigate("Player", {name: player, index: index, updateName: updateNameFunction});
+    const goToPlayerScreen = (playerData) => {
+        navigation.navigate("Player", {name: playerData.player, index: playerData.index, score: playerData.score, hooks: 
+          {
+            updateName: updateNameFunction,
+            updateScore: updateScoreFunction,
+            updateIncrement: updateIncrementFunction,
+          }
+        });
     }
 
     const [scoreData, setScoreData] = useState(
@@ -47,7 +53,7 @@ const ScoreScreen = ( {navigation} ) => {
         setScoreData(newScoreData);
       }
     
-      function updateScoreFunction(index, multiplier) {
+      function incrementScoreFunction(index, multiplier) {
         const playerData    = scoreData[index];
         const newScore      = playerData.score + (playerData.increment * multiplier);
         const newPlayerData = {
@@ -57,11 +63,21 @@ const ScoreScreen = ( {navigation} ) => {
     
         updateScoreData(index, newPlayerData);
       }
+
+      function updateScoreFunction(index, newScore) {
+        const playerData = scoreData[index];
+        const newPlayerData = {
+          ...playerData,
+          score: newScore,
+        };
+
+        updateScoreData(index, newPlayerData);
+      }
     
       function updateIncrementFunction(index, newIncrement) {
-        const playerDatan   = scoreIndex[index];
+        const playerData   = scoreData[index];
         const newPlayerData = {
-          ...scoreData,
+          ...playerData,
           increment: newIncrement,
         }
         updateScoreData(index, newPlayerData);
@@ -100,7 +116,7 @@ const ScoreScreen = ( {navigation} ) => {
         </NavBar>
         <ScoreContainer
           data={scoreData}
-          updateScoreFunction={updateScoreFunction}
+          incrementScoreFunction={incrementScoreFunction}
           updateNameFunction={updateNameFunction}
           goToPlayerScreen={goToPlayerScreen}
         >

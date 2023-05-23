@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
     }
 });
 
-const ScoreCard = ( {player, score, updateScoreFunction, updateNameFunction, goToPlayerScreen, pos} ) => {
+const ScoreCard = ( {player, score, incrementScoreFunction, updateNameFunction, goToPlayerScreen, index} ) => {
     return (
         <View style={styles.container}>
             <View style={styles.title}>
                 <Text style={{flex: 1}}>{player}</Text>
                 <Pressable
-                onPress={() => goToPlayerScreen(player, pos)}
+                onPress={() => goToPlayerScreen({player, index, score})}
                 style={{flex: 1, direction: "rtl"}}>
                     <FontAwesome
                         name="edit"
@@ -54,14 +54,14 @@ const ScoreCard = ( {player, score, updateScoreFunction, updateNameFunction, goT
             </View>
             <View style={styles.scoreContainer}>
                 <Pressable 
-                onPress={() => updateScoreFunction(pos, -1)}
+                onPress={() => incrementScoreFunction(index, -1)}
                 style={styles.increment}>
                     <Text >-</Text>
                 </Pressable>
 
                 <Text style={styles.score}>{score}</Text>
                 <Pressable 
-                onPress={() => updateScoreFunction(pos, 1)}
+                onPress={() => incrementScoreFunction(index, 1)}
                 style={styles.increment}>
                     <Text>+</Text>
                 </Pressable>

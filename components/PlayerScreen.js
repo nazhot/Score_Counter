@@ -53,8 +53,18 @@ const PlayerScreen = ( {navigation, route}) => {
     const [resetValue, setResetValue] = useState(route.params.resetValue);
 
     function updateName(name){
-        route.params.updateName(route.params.index, name);
+        route.params.hooks.updateName(route.params.index, name);
         setName(name);
+    }
+
+    function updateScore(score){
+        route.params.hooks.updateScore(route.params.index, score);
+        setScore(score);
+    }
+
+    function updateIncrement(increment){
+        route.params.hooks.updateIncrement(route.params.index, increment);
+        setIncrement(increment);
     }
 
     return(
@@ -72,13 +82,13 @@ const PlayerScreen = ( {navigation, route}) => {
                 styles={scoreInputStyle}
                 label="Score"
                 text={score}
-                onTextChange={setScore}
+                onTextChange={updateScore}
             />
             <InputWithLabel
                 styles={incrementInputStyle}
                 label="Increment"
                 text={increment}
-                onTextChange={setIncrement}
+                onTextChange={updateIncrement}
             />
             <InputWithLabel
                 styles={resetInputStyle}
