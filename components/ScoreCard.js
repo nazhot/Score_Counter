@@ -41,7 +41,7 @@ const ScoreCard = ( {player, score, updateScoreFunction, updateNameFunction, goT
             <View style={styles.title}>
                 <Text style={{flex: 1}}>{player}</Text>
                 <Pressable
-                onPress={() => goToPlayerScreen(player)}
+                onPress={() => goToPlayerScreen(player, pos)}
                 style={{flex: 1, direction: "rtl"}}>
                     <FontAwesome
                         name="edit"

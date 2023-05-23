@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 const ScoreScreen = ( {navigation} ) => {
 
-    const goToPlayerScreen = (player) => {
-        navigation.navigate("Player", {name: player});
+    const goToPlayerScreen = (player, index) => {
+        navigation.navigate("Player", {name: player, index: index, updateName: updateNameFunction});
     }
 
     const [scoreData, setScoreData] = useState(
@@ -67,8 +67,8 @@ const ScoreScreen = ( {navigation} ) => {
         updateScoreData(index, newPlayerData);
       }
     
-      function updateNameFunction(index) {
-        const newName       = "just a test";
+      function updateNameFunction(index, newName) {
+        //const newName       = "just a test";
         const playerData    = scoreData[index];
         const newPlayerData = {
           ...playerData,
