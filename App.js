@@ -18,7 +18,6 @@ export default function App() {
     <UserProvider>
       <NavigationContainer>
         <Stack.Navigator>
-
             <Stack.Screen
               name="Score"
               component={ScoreScreen}

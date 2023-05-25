@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { React } from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useScoreDataDispatch } from '../data/scoreData';
 
 const styles = StyleSheet.create({

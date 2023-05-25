@@ -1,7 +1,7 @@
 import { React } from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ScoreCard from './ScoreCard';
-import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
+import { useScoreData } from '../data/scoreData';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
  * @param {Array} data Array of object that define the various players and their scores
  */
 function generateScoreCards(goToPlayerScreen){
-    const scoreData         = useScoreData();
+    const scoreData  = useScoreData();
     const scoreCards = [];
     for ( const playerData of scoreData ) {
         scoreCards.push(

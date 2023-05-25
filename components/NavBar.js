@@ -1,6 +1,7 @@
 import { React } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { useScoreData } from '../data/scoreData';
 
 const iconSize = 30;
 const textSize = 18;
@@ -36,7 +37,23 @@ const styles = StyleSheet.create({
     }
 });
 
-const NavBar = ( {winner, addPlayer} ) => {
+const NavBar = ( ) => {
+
+    const scoreData = useScoreData();
+
+    let winner = "";
+    let winnerScore = 0;
+    for (let i = 0; i < scoreData.length; i++){
+      if (scoreData[i].score > winnerScore){
+        winner      = scoreData[i].name;
+        winnerScore = scoreData[i].score;
+      }
+    }
+
+    function addPlayer() {
+        
+    }
+
     return (
         <View
         style={styles.navbar}

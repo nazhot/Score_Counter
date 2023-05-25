@@ -1,4 +1,4 @@
-import { StyleSheet, View, SafeAreaView, Text, TextInput } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import InputWithLabel from './InputWithLabel';
 import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
@@ -73,7 +73,7 @@ const PlayerScreen = ( {navigation, route}) => {
             type: "update",
             user: {
                 ...playerData,
-                score: score,
+                score: parseInt(score),
             }
         });
         setScore(score);
@@ -84,7 +84,7 @@ const PlayerScreen = ( {navigation, route}) => {
             type: "update",
             user: {
                 ...playerData,
-                increment: increment,
+                increment: parseInt(increment),
             }
         });
         setIncrement(increment);
