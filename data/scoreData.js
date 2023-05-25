@@ -44,17 +44,31 @@ export function useScoreDataDispatch() {
 
 function scoreDataReducer(scoreData, action) {
     switch ( action.type ) {
-        case "addUser":
+        case "add": {
+            return [...scoreData, {
+                id: generateUniqueId({length: 10}),
+                name: action.name,
+                score: 0,
+                increment: 1,
+            }];
+        }
 
-        case "updateName":
+        case "update": {
+            return scoreData.map( u => {
+                if ( u.id === action.user.id ) {
+                    return action.user;
+                } else {
+                    return u;
+                }
+            });
+        }
 
-        case "updateScore":
+        case "delete": {
+            return scoreData.filter( u => u.id !== action.id );
+        }
 
-        case "incrementScore":
-
-        case "updateIncrement":
-
-        
+        default: {
+            throw Error('Unknown action: ' + action.type);
+        }
     }
-
 }
