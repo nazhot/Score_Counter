@@ -1,6 +1,7 @@
 import { StyleSheet, View, SafeAreaView, Text, TextInput } from 'react-native';
 import InputWithLabel from './InputWithLabel';
 import { useState } from 'react';
+import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 
 
 const styles = StyleSheet.create(
@@ -47,23 +48,45 @@ const resetInputStyle = StyleSheet.create(
 
 const PlayerScreen = ( {navigation, route}) => {
 
-    const [name,       setName]       = useState(route.params.name);
-    const [score,      setScore]      = useState(route.params.score);
-    const [increment,  setIncrement]  = useState(route.params.increment);
-    const [resetValue, setResetValue] = useState(route.params.resetValue);
+    const scoreData = useScoreData();
+    const scoreDataDispatch = useScoreDataDispatch();
+    const playerData = scoreData.filter(u => u.id == route.params.id)[0];
+
+    const [name,       setName]       = useState(playerData.name);
+    const [score,      setScore]      = useState(playerData.score);
+    const [increment,  setIncrement]  = useState(playerData.increment);
+    const [resetValue, setResetValue] = useState(playerData.resetValue);
 
     function updateName(name){
-        route.params.hooks.updateName(route.params.index, name);
+        scoreDataDispatch({
+            type: "update",
+            user: {
+                ...playerData,
+                name: name,
+            },
+        });
         setName(name);
     }
 
     function updateScore(score){
-        route.params.hooks.updateScore(route.params.index, score);
+        scoreDataDispatch({
+            type: "update",
+            user: {
+                ...playerData,
+                score: score,
+            }
+        });
         setScore(score);
     }
 
     function updateIncrement(increment){
-        route.params.hooks.updateIncrement(route.params.index, increment);
+        scoreDataDispatch({
+            type: "update",
+            user: {
+                ...playerData,
+                increment: increment,
+            }
+        });
         setIncrement(increment);
     }
 

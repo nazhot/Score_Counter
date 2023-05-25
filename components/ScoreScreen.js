@@ -6,12 +6,11 @@ import { useContext, useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 
 const ScoreScreen = ( {navigation} ) => {
-
     const scoreData         = useScoreData();
     const scoreDataDispatch = useScoreDataDispatch();
 
-    const goToPlayerScreen = (id) => {
-        navigation.navigate("Player", id);
+    const goToPlayerScreen = (id, name) => {
+        navigation.navigate("Player", {id, name});
     }
     
       let winner = "";

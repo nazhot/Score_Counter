@@ -26,7 +26,7 @@ export default function App() {
             <Stack.Screen
               name="Player"
               component={PlayerScreen}
-              options={({route}) => ({title: route.params.name})}
+              options={ ( { route } ) => ( { title: route.params.name } ) }
             />
         </Stack.Navigator>
       </NavigationContainer>

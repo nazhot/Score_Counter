@@ -36,16 +36,16 @@ const styles = StyleSheet.create({
     }
 });
 
-const ScoreCard = ( {player, score, id, goToPlayerScreen} ) => {
+const ScoreCard = ( {name, score, id, goToPlayerScreen} ) => {
 
     const scoreDataDispatch = useScoreDataDispatch();
 
     return (
         <View style={styles.container}>
             <View style={styles.title}>
-                <Text style={{flex: 1}}>{player}</Text>
+                <Text style={{flex: 1}}>{name}</Text>
                 <Pressable
-                onPress={() => goToPlayerScreen(id)}
+                onPress={() => goToPlayerScreen(id, name)}
                 style={{flex: 1, direction: "rtl"}}>
                     <FontAwesome
                         name="edit"

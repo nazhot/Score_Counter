@@ -20,7 +20,7 @@ function generateScoreCards(goToPlayerScreen){
     for ( const playerData of scoreData ) {
         scoreCards.push(
             <ScoreCard
-                player={playerData.name}
+                name={playerData.name}
                 id={playerData.id}
                 score={playerData.score}
                 key={playerData.id}
