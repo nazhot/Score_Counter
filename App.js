@@ -22,6 +22,7 @@ export default function App() {
             <Stack.Screen
               name="Score"
               component={ScoreScreen}
+              options={ { headerShown: false } }
             />
             <Stack.Screen
               name="Player"
