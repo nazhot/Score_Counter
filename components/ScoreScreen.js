@@ -2,9 +2,11 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 import NavBar from "./NavBar";
 import ScoreContainer from './ScoreContainer';
 import BottomNav from './BottomNav';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 const ScoreScreen = ( {navigation} ) => {
+
+    const [scoreData, setScoreData] = useContext(UserContext)
 
     const goToPlayerScreen = (playerData) => {
         navigation.navigate("Player", {name: playerData.player, index: playerData.index, score: playerData.score, hooks: 
@@ -15,21 +17,6 @@ const ScoreScreen = ( {navigation} ) => {
           }
         });
     }
-
-    const [scoreData, setScoreData] = useState(
-        [
-          {
-            name: "Maddie",
-            score: 2,
-            increment: 2,
-          },
-          {
-            name: "Noah",
-            score: 1,
-            increment: 3,
-          }
-        ]
-      );
     
       let winner = "";
       let winnerScore = 0;
