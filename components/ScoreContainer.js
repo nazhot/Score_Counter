@@ -1,6 +1,7 @@
 import { React } from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import ScoreCard from './ScoreCard';
+import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,33 +14,31 @@ const styles = StyleSheet.create({
  * Using the given data, create the ScoreCard components that will be within this ScoreContainer
  * @param {Array} data Array of object that define the various players and their scores
  */
-function generateScoreCards(dataObject, incrementScoreFunction, updateNameFunction, goToPlayerScreen){
+function generateScoreCards(goToPlayerScreen){
+    const scoreData         = useScoreData();
     const scoreCards = [];
-    let count = 0;
-    for ( const playerData of dataObject ) {
+    for ( const playerData of scoreData ) {
         scoreCards.push(
             <ScoreCard
                 player={playerData.name}
+                id={playerData.id}
                 score={playerData.score}
-                index={count}
-                key={count}
-                incrementScoreFunction={incrementScoreFunction}
-                updateNameFunction={updateNameFunction}
+                key={playerData.id}
                 goToPlayerScreen={goToPlayerScreen}
             />
         );
-        count++;
     }
     return scoreCards;
 }
 
 
-const ScoreContainer = ( {data, incrementScoreFunction, updateNameFunction, goToPlayerScreen} ) => {
+const ScoreContainer = ( {goToPlayerScreen} ) => {
+
     return (
         <View
             style={styles.container}
         >
-            {generateScoreCards(data, incrementScoreFunction, updateNameFunction, goToPlayerScreen)}
+            {generateScoreCards(goToPlayerScreen)}
         </View>
     );
 };

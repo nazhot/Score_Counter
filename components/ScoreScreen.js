@@ -3,19 +3,15 @@ import NavBar from "./NavBar";
 import ScoreContainer from './ScoreContainer';
 import BottomNav from './BottomNav';
 import { useContext, useState } from 'react';
+import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 
 const ScoreScreen = ( {navigation} ) => {
 
-    const [scoreData, setScoreData] = useContext(UserContext)
+    const scoreData         = useScoreData();
+    const scoreDataDispatch = useScoreDataDispatch();
 
-    const goToPlayerScreen = (playerData) => {
-        navigation.navigate("Player", {name: playerData.player, index: playerData.index, score: playerData.score, hooks: 
-          {
-            updateName: updateNameFunction,
-            updateScore: updateScoreFunction,
-            updateIncrement: updateIncrementFunction,
-          }
-        });
+    const goToPlayerScreen = (id) => {
+        navigation.navigate("Player", id);
     }
     
       let winner = "";

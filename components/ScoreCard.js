@@ -1,6 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { React } from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { useScoreDataDispatch } from '../data/scoreData';
 
 const styles = StyleSheet.create({
     container: {
@@ -35,13 +36,16 @@ const styles = StyleSheet.create({
     }
 });
 
-const ScoreCard = ( {player, score, incrementScoreFunction, updateNameFunction, goToPlayerScreen, index} ) => {
+const ScoreCard = ( {player, score, id, goToPlayerScreen} ) => {
+
+    const scoreDataDispatch = useScoreDataDispatch();
+
     return (
         <View style={styles.container}>
             <View style={styles.title}>
                 <Text style={{flex: 1}}>{player}</Text>
                 <Pressable
-                onPress={() => goToPlayerScreen({player, index, score})}
+                onPress={() => goToPlayerScreen(id)}
                 style={{flex: 1, direction: "rtl"}}>
                     <FontAwesome
                         name="edit"
@@ -54,14 +58,22 @@ const ScoreCard = ( {player, score, incrementScoreFunction, updateNameFunction, 
             </View>
             <View style={styles.scoreContainer}>
                 <Pressable 
-                onPress={() => incrementScoreFunction(index, -1)}
+                onPress={() => scoreDataDispatch({
+                    type: "increment",
+                    id: id,
+                    multiplier: -1,
+                })}
                 style={styles.increment}>
                     <Text >-</Text>
                 </Pressable>
 
                 <Text style={styles.score}>{score}</Text>
                 <Pressable 
-                onPress={() => incrementScoreFunction(index, 1)}
+                onPress={() => scoreDataDispatch({
+                    type: "increment",
+                    id: id,
+                    multiplier: +1,
+                })}
                 style={styles.increment}>
                     <Text>+</Text>
                 </Pressable>

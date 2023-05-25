@@ -7,27 +7,30 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ScoreScreen from './components/ScoreScreen';
 import PlayerScreen from './components/PlayerScreen';
+import { UserProvider } from './data/scoreData';
 
 const Stack = createNativeStackNavigator();
+
 
 export default function App() {
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <UserContext.Provider value={scoreData}>
-          <Stack.Screen
-            name="Score"
-            component={ScoreScreen}
-          />
-          <Stack.Screen
-            name="Player"
-            component={PlayerScreen}
-            options={({route}) => ({title: route.params.name})}
-          />
-        </UserContext.Provider>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+
+            <Stack.Screen
+              name="Score"
+              component={ScoreScreen}
+            />
+            <Stack.Screen
+              name="Player"
+              component={PlayerScreen}
+              options={({route}) => ({title: route.params.name})}
+            />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
 
