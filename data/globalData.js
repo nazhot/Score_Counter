@@ -23,10 +23,12 @@ function getDefaultSettings(){
     );
 }
 
-let lastSettings = getLastSettings();
-if ( lastSettings["increment"] === null ) {
-    lastSettings = getDefaultSettings();
-}
+// let lastSettings = getLastSettings();
+// if ( lastSettings["increment"] === null ) {
+//     lastSettings = getDefaultSettings();
+// }
+
+const lastSettings = getDefaultSettings();
 
 export function GlobalProvider( { children } ){
     const [globalData, globalDispatch] = useReducer(globalDataReducer, lastSettings);
@@ -52,7 +54,7 @@ function globalDataReducer(globalData, action) {
     switch ( action.type ) {
         case "update":{
             const newData = {...globalData};
-            newData[action.key] == action.value;
+            newData[action.key] = action.value;
             return newData;
         }
 

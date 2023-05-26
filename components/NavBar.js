@@ -2,6 +2,7 @@ import { React } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
+import { useGlobalData, useGlobalDataDispatch } from '../data/globalData';
 
 const iconSize = 30;
 const textSize = 18;
@@ -39,16 +40,20 @@ const styles = StyleSheet.create({
 
 const NavBar = ( ) => {
 
-    const scoreData         = useScoreData();
-    const scoreDataDispatch = useScoreDataDispatch();
+    const scoreData          = useScoreData();
+    const scoreDataDispatch  = useScoreDataDispatch();
+    const globalData         = useGlobalData();
+    const globalDataDispatch = useGlobalDataDispatch();
+    const higherScoreWins    = globalData.higherScoreWins;
+    let   winner             = "";
+    let   winnerScore        = higherScoreWins ? -30000: 30000;
 
-    let winner = "";
-    let winnerScore = 0;
     for (let i = 0; i < scoreData.length; i++){
-      if (scoreData[i].score > winnerScore){
-        winner      = scoreData[i].name;
-        winnerScore = scoreData[i].score;
-      }
+        const shouldReplace = higherScoreWins ? scoreData[i].score > winnerScore : scoreData[i].score < winnerScore;
+        if ( shouldReplace ) {
+            winner      = scoreData[i].name;
+            winnerScore = scoreData[i].score;
+        }
     }
 
     return (
@@ -56,12 +61,20 @@ const NavBar = ( ) => {
         style={styles.navbar}
         >
             <View style={styles.winnerContainer}>
-                <Text style={styles.text}>{winner}</Text>
-                <FontAwesome
-                    name="star"
-                    size={iconSize}
-                    color={iconColor}
-                />
+                <Pressable
+                onPress={() => globalDataDispatch({
+                    type: "update",
+                    key: "higherScoreWins",
+                    value: !higherScoreWins,
+                })}>
+                    <Text style={styles.text}>{winner}</Text>
+                    <FontAwesome
+                        name="star"
+                        size={iconSize}
+                        color={iconColor}
+                    />
+                </Pressable>
+
             </View>
 
             <View style={styles.spacer}></View>
