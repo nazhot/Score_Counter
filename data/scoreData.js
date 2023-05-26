@@ -1,26 +1,26 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext, createContext, useReducer } from "react";
 
 const ScoreDataContext = createContext(null);
 const ScoreDataDispatchContext = createContext(null);
 
+const getLastScore = async () => {
+    try {
+        const  jsonValue = await AsyncStorage.getItem("@lastGameStore");
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch(e) {
+        console.log(e);
+    }
+}
+
+let lastScore = getLastScore();
+if (!Array.isArray(lastScore)) {
+    lastScore = [];
+}
+
 export function UserProvider( { children } ){
     const [scoreData, scoreDispatch] = useReducer(
-        scoreDataReducer, 
-        [
-          {
-            name: "Maddie",
-            id: 0,
-            score: 2,
-            increment: 2,
-          },
-          {
-            name: "Noah",
-            id: 1,
-            score: 1,
-            increment: 3,
-          }
-        ]
-      );
+        scoreDataReducer, lastScore);
 
       return (
         <ScoreDataContext.Provider value={scoreData}>

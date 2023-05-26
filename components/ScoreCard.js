@@ -1,7 +1,8 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { React } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { useScoreDataDispatch } from '../data/scoreData';
+import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,7 +39,26 @@ const styles = StyleSheet.create({
 
 const ScoreCard = ( {name, score, id, goToPlayerScreen} ) => {
 
+    const scoreData         = useScoreData();
     const scoreDataDispatch = useScoreDataDispatch();
+    const storeData         = async (value) => {
+        try {
+            const jsonValue = JSON.stringify(value);
+            await AsyncStorage.setItem("@lastGameData", jsonValue);
+        } catch(e){
+            console.log(e);
+        }
+    }
+
+    function increment(multiplier){
+        scoreDataDispatch({
+            type: "increment",
+            id: id,
+            multiplier: multiplier,
+        });
+
+        storeData(scoreData);
+    }
 
     return (
         <View style={styles.container}>
@@ -58,22 +78,14 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen} ) => {
             </View>
             <View style={styles.scoreContainer}>
                 <Pressable 
-                onPress={() => scoreDataDispatch({
-                    type: "increment",
-                    id: id,
-                    multiplier: -1,
-                })}
+                onPress={() => increment(-1)}
                 style={styles.increment}>
                     <Text >-</Text>
                 </Pressable>
 
                 <Text style={styles.score}>{score}</Text>
                 <Pressable 
-                onPress={() => scoreDataDispatch({
-                    type: "increment",
-                    id: id,
-                    multiplier: +1,
-                })}
+                onPress={() => increment(1)}
                 style={styles.increment}>
                     <Text>+</Text>
                 </Pressable>

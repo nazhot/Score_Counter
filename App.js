@@ -11,7 +11,6 @@ import { UserProvider } from './data/scoreData';
 
 const Stack = createNativeStackNavigator();
 
-
 export default function App() {
 
   return (
