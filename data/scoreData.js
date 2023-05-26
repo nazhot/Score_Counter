@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext, createContext, useReducer } from "react";
+import { GlobalProvider } from "./globalData";
 
 const ScoreDataContext = createContext(null);
 const ScoreDataDispatchContext = createContext(null);
@@ -19,15 +20,17 @@ if (!Array.isArray(lastScore)) {
 }
 
 export function UserProvider( { children } ){
-    const [scoreData, scoreDispatch] = useReducer(
-        scoreDataReducer, lastScore);
+    const [scoreData, scoreDispatch] = useReducer(scoreDataReducer, lastScore);
 
       return (
-        <ScoreDataContext.Provider value={scoreData}>
-            <ScoreDataDispatchContext.Provider value={scoreDispatch}>
-                {children}
-            </ScoreDataDispatchContext.Provider>
-        </ScoreDataContext.Provider>
+        <GlobalProvider>
+            <ScoreDataContext.Provider value={scoreData}>
+                <ScoreDataDispatchContext.Provider value={scoreDispatch}>
+                    {children}
+                </ScoreDataDispatchContext.Provider>
+            </ScoreDataContext.Provider>
+        </GlobalProvider>
+
       );
 }
 
