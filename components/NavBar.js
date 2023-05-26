@@ -74,7 +74,6 @@ const NavBar = ( ) => {
                         color={iconColor}
                     />
                 </Pressable>
-
             </View>
 
             <View style={styles.spacer}></View>

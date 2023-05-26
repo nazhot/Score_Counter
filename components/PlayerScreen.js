@@ -1,8 +1,11 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import InputWithLabel from './InputWithLabel';
 import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 
+const borderRadius = 10;
+const borderWidth = 2;
+const borderColor = "#b2cdf7";
 
 const styles = StyleSheet.create(
     {
@@ -15,31 +18,60 @@ const styles = StyleSheet.create(
 
 const nameInputStyle = StyleSheet.create(
     {
-        container: {},
-        input: {},
-        text: {},
+        container: {
+            flex: 1,
+        },
+        input: {
+            flex: 1,
+            borderColor,
+            borderRadius,
+            borderWidth,
+        },
+        text: {
+            flex: 1,
+        },
     }
 );
 
 const scoreInputStyle = StyleSheet.create(
     {
-        container: {},
-        input: {},
-        text: {},
+        container: {
+            flex: 1,
+        },
+        input: {
+            flex: 1,
+            borderColor,
+            borderRadius,
+            borderWidth,
+        },
+        text: {
+            flex: 1,
+        },
     }
 );
 
 const incrementInputStyle = StyleSheet.create(
     {
-        container: {},
-        input: {},
-        text: {},
+        container: {
+            flex: 1,
+        },
+        input: {
+            flex: 1,
+            borderColor,
+            borderRadius,
+            borderWidth,
+        },
+        text: {
+            flex: 1,
+        },
     }
 );
 
 const resetInputStyle = StyleSheet.create(
     {
-        container: {},
+        container: {
+            flex: 1,
+        },
         input: {},
         text: {},
     }
@@ -90,6 +122,10 @@ const PlayerScreen = ( {navigation, route}) => {
         setIncrement(increment);
     }
 
+    function onPress(){
+        navigation.navigate("Score");
+    }
+
     return(
         <View style={{flex: 1, backgroundColor: "#f1f"}}>
             <InputWithLabel
@@ -118,6 +154,15 @@ const PlayerScreen = ( {navigation, route}) => {
                 label="Reset Value"
                 text={resetValue}
                 onTextChange={setResetValue}
+            />
+            <View
+            styles={ { flex: 4} }>
+
+            </View>
+            <Button
+            onPress={onPress}
+            title="Save"
+            color="#841583"
             />
         </View>
     );
