@@ -85,9 +85,23 @@ const PlayerScreen = ( {navigation, route}) => {
     const playerData = scoreData.filter(u => u.id == route.params.id)[0];
 
     const [name,       setName]       = useState(playerData.name);
-    const [score,      setScore]      = useState(playerData.score);
-    const [increment,  setIncrement]  = useState(playerData.increment);
-    const [resetValue, setResetValue] = useState(playerData.resetValue);
+    const [score,      setScore]      = useState(playerData.score.toString());
+    const [increment,  setIncrement]  = useState(playerData.increment.toString());
+    const [resetValue, setResetValue] = useState(playerData.resetValue.toString());
+
+    function saveChanges(){
+        scoreDataDispatch({
+            type: "update",
+            user: {
+                ...playerData,
+                name,
+                score: parseInt(score),
+                increment: parseInt(increment),
+                resetValue: parseInt(resetValue),
+            }
+        });
+        navigation.navigate("Score");
+    }
 
     function updateName(name){
         scoreDataDispatch({
@@ -122,17 +136,13 @@ const PlayerScreen = ( {navigation, route}) => {
         setIncrement(increment);
     }
 
-    function onPress(){
-        navigation.navigate("Score");
-    }
-
     return(
         <View style={{flex: 1, backgroundColor: "#f1f"}}>
             <InputWithLabel
                 styles={nameInputStyle}
                 label="Name"
                 text={name}
-                onTextChange={updateName}
+                onTextChange={setName}
             />
             <View>
 
@@ -141,13 +151,13 @@ const PlayerScreen = ( {navigation, route}) => {
                 styles={scoreInputStyle}
                 label="Score"
                 text={score}
-                onTextChange={updateScore}
+                onTextChange={setScore}
             />
             <InputWithLabel
                 styles={incrementInputStyle}
                 label="Increment"
                 text={increment}
-                onTextChange={updateIncrement}
+                onTextChange={setIncrement}
             />
             <InputWithLabel
                 styles={resetInputStyle}
@@ -160,7 +170,7 @@ const PlayerScreen = ( {navigation, route}) => {
 
             </View>
             <Button
-            onPress={onPress}
+            onPress={saveChanges}
             title="Save"
             color="#841583"
             />

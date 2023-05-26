@@ -52,6 +52,7 @@ function scoreDataReducer(scoreData, action) {
                 name: action.name,
                 score: 0,
                 increment: 1,
+                resetValue: 0,
             }];
         }
 
