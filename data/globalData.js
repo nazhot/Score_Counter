@@ -19,6 +19,8 @@ function getDefaultSettings(){
             increment: 1,
             higherScoreWins: true,
             sortPlayers: false,
+            useGlobalSettings: false,
+            resetValue: 0,
         }
     );
 }
