@@ -28,7 +28,4 @@ const gameSettings = {
     },
 }
 
-
-
-
 export default gameSettings;

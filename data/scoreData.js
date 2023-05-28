@@ -77,6 +77,15 @@ function scoreDataReducer(scoreData, action) {
             });
         }
 
+        case "resetAll" : {
+            return scoreData.map( u => {
+                return {
+                    ...u,
+                    score: u.resetValue,
+                }
+            });
+        }
+
         case "delete": {
             return scoreData.filter( u => u.id !== action.id );
         }

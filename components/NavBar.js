@@ -95,11 +95,15 @@ const NavBar = ( ) => {
                         color={iconColor}
                     />
                 </Pressable>
-                <FontAwesome
-                    name="clock-o"
-                    size={iconSize}
-                    color={iconColor}
-                />
+                <Pressable
+                    onPress={() => scoreDataDispatch({type: "resetAll"})}
+                >
+                    <FontAwesome
+                        name="clock-o"
+                        size={iconSize}
+                        color={iconColor}
+                    />
+                </Pressable>
                 <FontAwesome
                     name="ellipsis-h"
                     size={iconSize}
