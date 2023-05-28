@@ -2,6 +2,7 @@ import { StyleSheet, View, Button } from 'react-native';
 import InputWithLabel from './InputWithLabel';
 import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
+import { useGlobalData, useGlobalDataDispatch } from '../data/globalData';
 
 const borderRadius = 10;
 const borderWidth = 2;
@@ -80,14 +81,16 @@ const resetInputStyle = StyleSheet.create(
 
 const PlayerScreen = ( {navigation, route}) => {
 
-    const scoreData = useScoreData();
-    const scoreDataDispatch = useScoreDataDispatch();
-    const playerData = scoreData.filter(u => u.id == route.params.id)[0];
+    const scoreData          = useScoreData();
+    const scoreDataDispatch  = useScoreDataDispatch();
+    const globalData         = useGlobalData();
+    const globalDataDispatch = useGlobalDataDispatch();
+    const playerData         = scoreData.filter(u => u.id == route.params.id)[0];
 
     const [name,       setName]       = useState(playerData.name);
     const [score,      setScore]      = useState(playerData.score.toString());
-    const [increment,  setIncrement]  = useState(playerData.increment.toString());
-    const [resetValue, setResetValue] = useState(playerData.resetValue.toString());
+    const [increment,  setIncrement]  = useState(globalData.useGlobalSettings ? globalData.increment.toString() : playerData.increment.toString());
+    const [resetValue, setResetValue] = useState(globalData.useGlobalSettings ? globalData.resetValue.toString() :playerData.resetValue.toString());
 
     function saveChanges(){
         scoreDataDispatch({
@@ -98,8 +101,15 @@ const PlayerScreen = ( {navigation, route}) => {
                 score: parseInt(score),
                 increment: parseInt(increment),
                 resetValue: parseInt(resetValue),
-            }
+            },
         });
+        if ( globalData.useGlobalSettings ) {
+            globalDataDispatch({
+                type: "updateMultiple",
+                keys: ["increment", "resetValue"],
+                values: [increment, resetValue],
+            });
+        }
         navigation.navigate("Score");
     }
 

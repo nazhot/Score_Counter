@@ -3,6 +3,7 @@ import { React } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useGlobalData } from '../data/globalData';
 
 const styles = StyleSheet.create({
     container: {

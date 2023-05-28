@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext, createContext, useReducer } from "react";
-import { GlobalProvider } from "./globalData";
+import { GlobalProvider, useGlobalData } from "./globalData";
 
 const ScoreDataContext = createContext(null);
 const ScoreDataDispatchContext = createContext(null);
@@ -42,17 +42,15 @@ export function useScoreDataDispatch() {
     return useContext(ScoreDataDispatchContext);
 }
 
-let nextId = 2;
-
 function scoreDataReducer(scoreData, action) {
     switch ( action.type ) {
         case "add": {
             return [...scoreData, {
-                id: nextId++,
+                id: action.globalData.nextId,
                 name: action.name,
-                score: 0,
-                increment: 1,
-                resetValue: 0,
+                score: action.globalData.useGlobalSettings ? action.globalData.resetValue : 0,
+                increment: action.globalData.useGlobalSettings ? action.globalData.increment : 1,
+                resetValue: action.globalData.useGlobalSettings ? action.globalData.resetValue : 0,
             }];
         }
 

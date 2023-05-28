@@ -80,10 +80,14 @@ const NavBar = ( ) => {
 
             <View style={styles.icons}>
                 <Pressable
-                    onPress={() => scoreDataDispatch({
+                    onPress={() => {
+                        scoreDataDispatch({
                         type: "add",
                         name: "Test",
-                    })}
+                        globalData: globalData,
+                        });
+                        globalDataDispatch({type: "update", key: "nextId", value: globalData.nextId + 1});
+                    }}
                 >
                     <FontAwesome
                         name="plus"

@@ -16,11 +16,12 @@ const getLastSettings = async () => {
 function getDefaultSettings(){
     return(
         {
-            increment: 1,
+            increment: 5,
             higherScoreWins: true,
             sortPlayers: false,
-            useGlobalSettings: false,
-            resetValue: 0,
+            useGlobalSettings: true,
+            resetValue: 5,
+            nextId: 0,
         }
     );
 }
@@ -54,9 +55,17 @@ export function useGlobalDataDispatch() {
 
 function globalDataReducer(globalData, action) {
     switch ( action.type ) {
-        case "update":{
+        case "update": {
             const newData = {...globalData};
             newData[action.key] = action.value;
+            return newData;
+        }
+
+        case "updateMultiple": {
+            const newData = {...globalData};
+            for ( let i = 0; i < action.keys.length; i++ ) {
+                newData[action.keys[i]] = action.values[i];
+            }
             return newData;
         }
 
