@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
 function generateScoreCards(goToPlayerScreen){
     const scoreData  = useScoreData();
     const scoreCards = [];
+    
     if ( scoreData.length === 0 ) {
         return [];
     }

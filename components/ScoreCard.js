@@ -43,10 +43,6 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
     const scoreDataDispatch = useScoreDataDispatch();
     const cardColor         = "hsl(" + hue + ", 100%, 50%)";
     const titleColor        = "hsl(" + hue + ", 100%, 70%)";
-
-    // styles.container.backgroundColor = cardColor;
-    // styles.title.backgroundColor     = titleColor;
-
     const storeData         = async (value) => {
         try {
             const jsonValue = JSON.stringify(value);
@@ -81,7 +77,6 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
                         
                     />
                 </Pressable>
- 
             </View>
             <View style={styles.scoreContainer}>
                 <Pressable 

@@ -7,15 +7,6 @@ const borderRadius = 10;
 const borderWidth = 2;
 const borderColor = "#b2cdf7";
 
-const styles = StyleSheet.create(
-    {
-        container: {},
-        scoreInput: {},
-        incrementInput: {},
-        resetValueInput: {},
-    }
-);
-
 const nameInputStyle = StyleSheet.create(
     {
         container: {
@@ -77,12 +68,11 @@ const resetInputStyle = StyleSheet.create(
     }
 );
 
-
 const PlayerScreen = ( {navigation, route}) => {
 
-    const scoreData          = useScoreData();
-    const scoreDataDispatch  = useScoreDataDispatch();
-    const playerData         = scoreData.filter(u => u.id == route.params.id)[0];
+    const scoreData         = useScoreData();
+    const scoreDataDispatch = useScoreDataDispatch();
+    const playerData        = scoreData.filter(u => u.id == route.params.id)[0];
 
     const [name,       setName]       = useState(playerData.name);
     const [score,      setScore]      = useState(playerData.score.toString());
@@ -111,9 +101,7 @@ const PlayerScreen = ( {navigation, route}) => {
                 text={name}
                 onTextChange={setName}
             />
-            <View>
-
-            </View>
+            <View/>
             <InputWithLabel
                 styles={scoreInputStyle}
                 label="Score"
@@ -133,17 +121,15 @@ const PlayerScreen = ( {navigation, route}) => {
                 onTextChange={setResetValue}
             />
             <View
-            styles={ { flex: 4} }>
-
-            </View>
+                styles={ { flex: 4} }
+            />
             <Button
-            onPress={saveChanges}
-            title="Save"
-            color="#841583"
+                onPress={saveChanges}
+                title="Save"
+                color="#841583"
             />
         </View>
     );
-
 };
 
 

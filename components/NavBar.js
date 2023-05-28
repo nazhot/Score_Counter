@@ -4,9 +4,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import { useGlobalData, useGlobalDataDispatch } from '../data/globalData';
 
-const iconSize = 30;
-const textSize = 18;
-const iconColor = "#000"
+const iconSize         = 30;
+const textSize         = 18;
+const iconColor        = "#000"
 const containerPadding = 4;
 
 const styles = StyleSheet.create({
