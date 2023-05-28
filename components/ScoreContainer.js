@@ -5,7 +5,7 @@ import { useScoreData } from '../data/scoreData';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#0a7",
+        backgroundColor: "#333",
         flex: 9,
     }
 });
@@ -26,8 +26,9 @@ function generateScoreCards(goToPlayerScreen){
             <ScoreCard
                 name={playerData.name}
                 id={playerData.id}
-                score={playerData.score}
+                score={playerData.score.toString()}
                 key={playerData.id}
+                hue={"167"}
                 goToPlayerScreen={goToPlayerScreen}
             />
         );

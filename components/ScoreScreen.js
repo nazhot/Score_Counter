@@ -26,7 +26,7 @@ const ScoreScreen = ( {navigation} ) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#f0a',
+      backgroundColor: '#111',
     },
   });
   

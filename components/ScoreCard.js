@@ -6,41 +6,47 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#3f1",
         flex: 1,
         flexDirection: "column",
+        borderRadius: 10,
+        overflow: "hidden",
     }, 
     title: {
-        flex: 1,
-        backgroundColor: "#add8e6",
+        height: 45,
         flexDirection: "row",
+        alignItems: "center",
     },
     scoreContainer: {
         flexDirection: "row",
         flex: 10,
         color: "#fff",
         alignItems: "stretch",
-        justifyContent: "center",
-        textAlign: "center",
     },
     increment: {
-        flex: 1,
+        flex: 3,
         fontSize: 10,
-        backgroundColor: "#FFA500",
         alignItems: "center",
         justifyContent: "center",
     },
     score: {
         flex: 9,
+        flexDirection: "column",
         fontSize: 30,
         textAlign: "center",
+        textAlignVertical: "center",
     }
 });
 
-const ScoreCard = ( {name, score, id, goToPlayerScreen} ) => {
+const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
 
     const scoreData         = useScoreData();
     const scoreDataDispatch = useScoreDataDispatch();
+    const cardColor         = "hsl(" + hue + ", 100%, 50%)";
+    const titleColor        = "hsl(" + hue + ", 100%, 70%)";
+
+    // styles.container.backgroundColor = cardColor;
+    // styles.title.backgroundColor     = titleColor;
+
     const storeData         = async (value) => {
         try {
             const jsonValue = JSON.stringify(value);
@@ -61,9 +67,10 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen} ) => {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.title}>
+        <View style={[styles.container, {backgroundColor: cardColor}]}>
+            <View style={[styles.title, {backgroundColor: titleColor}]}>
                 <Text style={{flex: 1}}>{name}</Text>
+                <View style={{flex: 8}}/>
                 <Pressable
                 onPress={() => goToPlayerScreen(id, name)}
                 style={{flex: 1, direction: "rtl"}}>
