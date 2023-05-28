@@ -6,8 +6,12 @@ import BottomNav from './BottomNav';
 const ScoreScreen = ( {navigation} ) => {
 
     const goToPlayerScreen = (id, name) => {
-        navigation.navigate("Player", {id, name});
-    }
+      navigation.navigate("Player", {id, name});
+    };
+
+    const goToNewGameScreen = () => {
+      navigation.navigate("NewGame");
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -16,8 +20,9 @@ const ScoreScreen = ( {navigation} ) => {
           goToPlayerScreen={goToPlayerScreen}
         >
         </ScoreContainer>
-        <BottomNav>
-
+        <BottomNav
+          goToNewGameScreen={goToNewGameScreen}
+        >
         </BottomNav>
       </SafeAreaView>
     );

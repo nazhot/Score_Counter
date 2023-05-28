@@ -1,8 +1,3 @@
-import { StyleSheet, SafeAreaView } from 'react-native';
-import NavBar from "./components/NavBar";
-import ScoreContainer from './components/ScoreContainer';
-import BottomNav from './components/BottomNav';
-import { useState, createContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ScoreScreen from './components/ScoreScreen';
