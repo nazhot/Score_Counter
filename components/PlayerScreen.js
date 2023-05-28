@@ -2,7 +2,6 @@ import { StyleSheet, View, Button } from 'react-native';
 import InputWithLabel from './InputWithLabel';
 import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
-import { useGlobalData, useGlobalDataDispatch } from '../data/globalData';
 
 const borderRadius = 10;
 const borderWidth = 2;
@@ -83,14 +82,12 @@ const PlayerScreen = ( {navigation, route}) => {
 
     const scoreData          = useScoreData();
     const scoreDataDispatch  = useScoreDataDispatch();
-    const globalData         = useGlobalData();
-    const globalDataDispatch = useGlobalDataDispatch();
     const playerData         = scoreData.filter(u => u.id == route.params.id)[0];
 
     const [name,       setName]       = useState(playerData.name);
     const [score,      setScore]      = useState(playerData.score.toString());
-    const [increment,  setIncrement]  = useState(globalData.useGlobalSettings ? globalData.increment.toString() : playerData.increment.toString());
-    const [resetValue, setResetValue] = useState(globalData.useGlobalSettings ? globalData.resetValue.toString() :playerData.resetValue.toString());
+    const [increment,  setIncrement]  = useState(playerData.increment.toString());
+    const [resetValue, setResetValue] = useState(playerData.resetValue.toString());
 
     function saveChanges(){
         scoreDataDispatch({
@@ -103,47 +100,7 @@ const PlayerScreen = ( {navigation, route}) => {
                 resetValue: parseInt(resetValue),
             },
         });
-        if ( globalData.useGlobalSettings ) {
-            globalDataDispatch({
-                type: "updateMultiple",
-                keys: ["increment", "resetValue"],
-                values: [increment, resetValue],
-            });
-        }
         navigation.navigate("Score");
-    }
-
-    function updateName(name){
-        scoreDataDispatch({
-            type: "update",
-            user: {
-                ...playerData,
-                name: name,
-            },
-        });
-        setName(name);
-    }
-
-    function updateScore(score){
-        scoreDataDispatch({
-            type: "update",
-            user: {
-                ...playerData,
-                score: parseInt(score),
-            }
-        });
-        setScore(score);
-    }
-
-    function updateIncrement(increment){
-        scoreDataDispatch({
-            type: "update",
-            user: {
-                ...playerData,
-                increment: parseInt(increment),
-            }
-        });
-        setIncrement(increment);
     }
 
     return(

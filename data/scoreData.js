@@ -48,9 +48,9 @@ function scoreDataReducer(scoreData, action) {
             return [...scoreData, {
                 id: action.globalData.nextId,
                 name: action.name,
-                score: action.globalData.useGlobalSettings ? action.globalData.resetValue : 0,
-                increment: action.globalData.useGlobalSettings ? action.globalData.increment : 1,
-                resetValue: action.globalData.useGlobalSettings ? action.globalData.resetValue : 0,
+                score: action.globalData.startingResetValue,
+                increment: action.globalData.startingIncrement,
+                resetValue: action.globalData.startingResetValue,
             }];
         }
 

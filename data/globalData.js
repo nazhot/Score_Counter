@@ -16,11 +16,10 @@ const getLastSettings = async () => {
 function getDefaultSettings(){
     return(
         {
-            increment: 5,
+            startingIncrement: 5,
             higherScoreWins: true,
             sortPlayers: false,
-            useGlobalSettings: true,
-            resetValue: 5,
+            startingResetValue: 5,
             nextId: 0,
         }
     );
