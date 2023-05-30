@@ -56,16 +56,10 @@ export function useGlobalDataDispatch() {
 function globalDataReducer(globalData, action) {
     switch ( action.type ) {
         case "update": {
-            const newData = {...globalData};
-            newData[action.key] = action.value;
-            return newData;
-        }
-
-        case "updateMultiple": {
-            const newData = {...globalData};
-            for ( let i = 0; i < action.keys.length; i++ ) {
-                newData[action.keys[i]] = action.values[i];
-            }
+            const newData = {
+                ...globalData,
+                ...action.newSettings
+            };
             return newData;
         }
 

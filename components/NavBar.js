@@ -64,8 +64,9 @@ const NavBar = ( ) => {
                 <Pressable
                 onPress={() => globalDataDispatch({
                     type: "update",
-                    key: "higherScoreWins",
-                    value: !higherScoreWins,
+                    newSettings: {
+                        higherScoreWins: !higherScoreWins,
+                    }
                 })}>
                     <Text style={styles.text}>{winner}</Text>
                     <FontAwesome
@@ -82,11 +83,16 @@ const NavBar = ( ) => {
                 <Pressable
                     onPress={() => {
                         scoreDataDispatch({
-                        type: "add",
-                        name: "Test",
-                        globalData: globalData,
+                            type: "add",
+                            name: "Test",
+                            globalData: globalData,
                         });
-                        globalDataDispatch({type: "update", key: "nextId", value: globalData.nextId + 1});
+                        globalDataDispatch({
+                            type: "update", 
+                            newSettings: {
+                                nextId: globalData.nextId + 1,
+                            }
+                        });
                     }}
                 >
                     <FontAwesome

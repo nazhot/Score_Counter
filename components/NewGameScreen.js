@@ -46,12 +46,17 @@ function createGameSettingsComponents(game, setGame){
 const NewGameScreen = ( { navigation, routes } ) => {
 
     const globalData          = useGlobalData();
-    const globalDispatch      = useGlobalDataDispatch();
+    const globalDataDispatch      = useGlobalDataDispatch();
     const [game, setGame]     = useState(globalData.currentGame);
     const currentGameSettings = gameSettings[game];
 
     function createNewGame() {
-        globalDispatch({type: "update", key: "currentGame", value: game});
+        globalDataDispatch({
+            type: "update",
+            newSettings: {
+                currentGame: game,
+            }
+        });
         navigation.navigate("Score");
     }
 
