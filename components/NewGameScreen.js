@@ -53,6 +53,10 @@ const NewGameScreen = ( { navigation, routes } ) => {
     const currentGameSettings = gameSettings[game];
 
     function createNewGame() {
+        if ( game === globalData.currentGame ) {
+            navigation.navigate("Score");
+            return;
+        }
         globalDataDispatch({
             type: "update",
             newSettings: {
