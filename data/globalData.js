@@ -21,6 +21,7 @@ function getDefaultSettings(){
             sortPlayers: false,
             startingResetValue: 5,
             nextId: 0,
+            currentGame: "Rummy",
         }
     );
 }

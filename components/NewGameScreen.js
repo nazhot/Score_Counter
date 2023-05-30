@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         width: 100,
         justifyContent: "center",
         alignItems: "center",
-    }
+    },
 });
 
 function createGameSettingsComponents(game, setGame){
@@ -45,8 +45,16 @@ function createGameSettingsComponents(game, setGame){
 
 const NewGameScreen = ( { navigation, routes } ) => {
 
-    const [game, setGame] = useState(Object.keys(gameSettings)[0]);
+    const globalData          = useGlobalData();
+    const globalDispatch      = useGlobalDataDispatch();
+    const [game, setGame]     = useState(globalData.currentGame);
     const currentGameSettings = gameSettings[game];
+
+    function createNewGame() {
+        globalDispatch({type: "update", key: "currentGame", value: game});
+        navigation.navigate("Score");
+    }
+
 
     return(
         <View
@@ -63,6 +71,11 @@ const NewGameScreen = ( { navigation, routes } ) => {
             >
 
             </View>
+            <Button
+                title="Create New Game"
+                onPress={createNewGame}
+                color="#111"
+            />
         </View>
     );
 }
