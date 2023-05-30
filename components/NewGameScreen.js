@@ -1,6 +1,7 @@
 import { View, Text, TextInput, ScrollView, Button, StyleSheet, Pressable } from "react-native";
 import InputWithLabel from "./InputWithLabel";
 import { useGlobalData, useGlobalDataDispatch } from "../data/globalData";
+import { useScoreDataDispatch } from "../data/scoreData";
 import gameSettings from "../data/games";
 import { useState } from "react";
 
@@ -46,7 +47,8 @@ function createGameSettingsComponents(game, setGame){
 const NewGameScreen = ( { navigation, routes } ) => {
 
     const globalData          = useGlobalData();
-    const globalDataDispatch      = useGlobalDataDispatch();
+    const globalDataDispatch  = useGlobalDataDispatch();
+    const scoreDataDispatch   = useScoreDataDispatch();
     const [game, setGame]     = useState(globalData.currentGame);
     const currentGameSettings = gameSettings[game];
 
@@ -55,6 +57,17 @@ const NewGameScreen = ( { navigation, routes } ) => {
             type: "update",
             newSettings: {
                 currentGame: game,
+                startingResetValue: currentGameSettings.resetValue,
+                startingIncrement:  currentGameSettings.increment,
+                higherScoreWins:    currentGameSettings.higherScoreWins,
+            }
+        });
+        scoreDataDispatch({
+            type: "updateAll",
+            newData: {
+                increment:  currentGameSettings.increment,
+                score:      currentGameSettings.resetValue,
+                resetValue: currentGameSettings.resetValue,
             }
         });
         navigation.navigate("Score");

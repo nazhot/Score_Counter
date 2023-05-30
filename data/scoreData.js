@@ -64,6 +64,15 @@ function scoreDataReducer(scoreData, action) {
             });
         }
 
+        case "updateAll": {
+            return scoreData.map( u => {
+                return {
+                    ...u,
+                    ...action.newData,
+                }
+            });
+        }
+
         case "increment": {
             return scoreData.map( u => {
                 if ( u.id === action.id ) {
