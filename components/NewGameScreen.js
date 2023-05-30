@@ -24,7 +24,19 @@ const styles = StyleSheet.create({
     },
 });
 
-function createGameSettingsComponents(game, setGame){
+const inputStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    input: {
+        flex: 1,
+    },
+    text: {
+        flex: 1,
+    }
+})
+
+function createGameNameComponents(game, setGame){
     const gameButtons = [];
     let key = 0;
     for ( const gameName in gameSettings) {
@@ -41,6 +53,25 @@ function createGameSettingsComponents(game, setGame){
     }
 
     return gameButtons;
+}
+
+function createGameSettingsComponents(game, currentGameSettings){
+    const components = [];
+    let count = 0;
+    for ( const settingName in currentGameSettings ) {
+        let settingValue = currentGameSettings[settingName];
+        components.push(
+            <InputWithLabel
+                label={settingName}
+                text={settingValue}
+                onTextChange={(text) => settingValue = text}
+                key={count}
+                styles={inputStyles}
+            />
+        );
+        count++;
+    }
+    return components;
 }
 
 
@@ -86,12 +117,12 @@ const NewGameScreen = ( { navigation, routes } ) => {
                 style={styles.topPanel}
                 horizontal={true}
             >
-                {createGameSettingsComponents(game, setGame)}
+                {createGameNameComponents(game, setGame)}
             </ScrollView>
             <View
                 style={styles.settingsPanel}
             >
-
+                {createGameSettingsComponents(game, currentGameSettings)}
             </View>
             <Button
                 title="Create New Game"
