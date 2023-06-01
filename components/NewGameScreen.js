@@ -86,18 +86,12 @@ const NewGameScreen = ( { navigation, routes } ) => {
 
     function editGameSettings(gameName, settingName, settingValue){
         const newGamesSettings = {...gamesSettings};
-        const currentValue     = newGamesSettings[gameName][settingName];
 
               newGamesSettings[gameName][settingName] = settingValue;
         setGamesSettings(newGamesSettings);
     }
 
     function createNewGame() {
-        if ( game === globalData.currentGame ) {
-            navigation.navigate("Score");
-            return;
-        }
-
         const currentGameSettings = gamesSettings[game];
 
         globalDataDispatch({
@@ -109,13 +103,18 @@ const NewGameScreen = ( { navigation, routes } ) => {
                 higherScoreWins:    currentGameSettings.higherScoreWins.toString() === "true",
             }
         });
+
+        const newData = {
+            increment:  parseInt(currentGameSettings.increment),
+            resetValue: parseInt(currentGameSettings.resetValue),
+        }
+
+        if ( game !== globalData.currentGame ) {
+            newData.score = parseInt(currentGameSettings.resetValue);
+        }
         scoreDataDispatch({
             type: "updateAll",
-            newData: {
-                increment:  parseInt(currentGameSettings.increment),
-                score:      parseInt(currentGameSettings.resetValue),
-                resetValue: parseInt(currentGameSettings.resetValue),
-            }
+            newData,
         });
         navigation.navigate("Score");
     }
