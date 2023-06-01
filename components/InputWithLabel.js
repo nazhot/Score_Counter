@@ -9,7 +9,7 @@ const InputWithLabel = ( {styles, label, text, onTextChange} ) => {
             <TextInput
                 style={styles.input}
                 onChangeText={onTextChange}
-                value={text}
+                value={text.toString()}
             />
             <Text
                 style={styles.text}

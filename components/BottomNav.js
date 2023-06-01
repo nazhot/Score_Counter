@@ -12,15 +12,15 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     currentGame: {
-        flex: 1,
-        fontSize: 30,
+        flex: 3,
+        fontSize: 20,
     },
     spacer: {
         flex: 6,
     },
     newGame: {
         flex: 1,
-        fontSize: 30,
+        fontSize: 10,
     }
 });
 

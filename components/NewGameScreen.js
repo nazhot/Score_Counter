@@ -4,6 +4,7 @@ import { useGlobalData, useGlobalDataDispatch } from "../data/globalData";
 import { useScoreDataDispatch } from "../data/scoreData";
 import gameSettings from "../data/games";
 import { useState } from "react";
+import { endAsyncEvent } from "react-native/Libraries/Performance/Systrace";
 
 
 const styles = StyleSheet.create({
@@ -55,16 +56,16 @@ function createGameNameComponents(game, setGame){
     return gameButtons;
 }
 
-function createGameSettingsComponents(game, currentGameSettings){
+function createGameSettingsComponents(game, gamesSettings, setGamesSettings){
     const components = [];
     let count = 0;
-    for ( const settingName in currentGameSettings ) {
-        let settingValue = currentGameSettings[settingName];
+    for ( const settingName in gamesSettings[game] ) {
+        let settingValue = gamesSettings[game][settingName];
         components.push(
             <InputWithLabel
                 label={settingName}
                 text={settingValue}
-                onTextChange={(text) => settingValue = text}
+                onTextChange={(text) => setGamesSettings(game, settingName, text)}
                 key={count}
                 styles={inputStyles}
             />
@@ -81,28 +82,39 @@ const NewGameScreen = ( { navigation, routes } ) => {
     const globalDataDispatch  = useGlobalDataDispatch();
     const scoreDataDispatch   = useScoreDataDispatch();
     const [game, setGame]     = useState(globalData.currentGame);
-    const currentGameSettings = gameSettings[game];
+    const [gamesSettings, setGamesSettings] = useState({...gameSettings});
+
+    function editGameSettings(gameName, settingName, settingValue){
+        const newGamesSettings = {...gamesSettings};
+        const currentValue     = newGamesSettings[gameName][settingName];
+
+              newGamesSettings[gameName][settingName] = settingValue;
+        setGamesSettings(newGamesSettings);
+    }
 
     function createNewGame() {
         if ( game === globalData.currentGame ) {
             navigation.navigate("Score");
             return;
         }
+
+        const currentGameSettings = gamesSettings[game];
+
         globalDataDispatch({
             type: "update",
             newSettings: {
                 currentGame: game,
-                startingResetValue: currentGameSettings.resetValue,
-                startingIncrement:  currentGameSettings.increment,
-                higherScoreWins:    currentGameSettings.higherScoreWins,
+                startingResetValue: parseInt(currentGameSettings.resetValue),
+                startingIncrement:  parseInt(currentGameSettings.increment),
+                higherScoreWins:    currentGameSettings.higherScoreWins.toString() === "true",
             }
         });
         scoreDataDispatch({
             type: "updateAll",
             newData: {
-                increment:  currentGameSettings.increment,
-                score:      currentGameSettings.resetValue,
-                resetValue: currentGameSettings.resetValue,
+                increment:  parseInt(currentGameSettings.increment),
+                score:      parseInt(currentGameSettings.resetValue),
+                resetValue: parseInt(currentGameSettings.resetValue),
             }
         });
         navigation.navigate("Score");
@@ -122,7 +134,7 @@ const NewGameScreen = ( { navigation, routes } ) => {
             <View
                 style={styles.settingsPanel}
             >
-                {createGameSettingsComponents(game, currentGameSettings)}
+                {createGameSettingsComponents(game, gamesSettings, editGameSettings)}
             </View>
             <Button
                 title="Create New Game"
