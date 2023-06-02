@@ -102,7 +102,7 @@ const NavBar = ( ) => {
                     />
                 </Pressable>
                 <Pressable
-                    onPress={() => scoreDataDispatch({type: "resetAll"})}
+                    onPress={() => scoreDataDispatch({type: "resetAll", globalData: {higherScoreWins: globalData.higherScoreWins}})}
                 >
                     <FontAwesome
                         name="clock-o"

@@ -2,6 +2,7 @@ import { StyleSheet, View, Button } from 'react-native';
 import InputWithLabel from './InputWithLabel';
 import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
+import { useGlobalData } from '../data/globalData';
 
 const borderRadius = 10;
 const borderWidth = 2;
@@ -72,6 +73,7 @@ const PlayerScreen = ( {navigation, route}) => {
 
     const scoreData         = useScoreData();
     const scoreDataDispatch = useScoreDataDispatch();
+    const globalData        = useGlobalData();
     const playerData        = scoreData.filter(u => u.id == route.params.id)[0];
 
     const [name,       setName]       = useState(playerData.name);
@@ -89,6 +91,9 @@ const PlayerScreen = ( {navigation, route}) => {
                 increment: parseInt(increment),
                 resetValue: parseInt(resetValue),
             },
+            globalData: {
+                higherScoreWins: globalData.higherScoreWins,
+            }
         });
         navigation.navigate("Score");
     }

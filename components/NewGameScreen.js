@@ -4,7 +4,6 @@ import { useGlobalData, useGlobalDataDispatch } from "../data/globalData";
 import { useScoreDataDispatch } from "../data/scoreData";
 import gameSettings from "../data/games";
 import { useState } from "react";
-import { endAsyncEvent } from "react-native/Libraries/Performance/Systrace";
 
 
 const styles = StyleSheet.create({
@@ -91,6 +90,9 @@ const NewGameScreen = ( { navigation, routes } ) => {
         setGamesSettings(newGamesSettings);
     }
 
+    function writeToLog(){
+    }
+
     function createNewGame() {
         const currentGameSettings = gamesSettings[game];
 
@@ -111,10 +113,14 @@ const NewGameScreen = ( { navigation, routes } ) => {
 
         if ( game !== globalData.currentGame ) {
             newData.score = parseInt(currentGameSettings.resetValue);
+            writeToLog();
         }
         scoreDataDispatch({
             type: "updateAll",
             newData,
+            globalData: {
+                higherScoreWins: globalData.higherScoreWins,
+            }
         });
         navigation.navigate("Score");
     }

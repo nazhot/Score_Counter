@@ -3,6 +3,7 @@ import { React } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useGlobalData } from '../data/globalData';
 
 const styles = StyleSheet.create({
     container: {
@@ -41,8 +42,12 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
 
     const scoreData         = useScoreData();
     const scoreDataDispatch = useScoreDataDispatch();
+    const globalData        = useGlobalData();
     const cardColor         = "hsl(" + hue + ", 100%, 50%)";
     const titleColor        = "hsl(" + hue + ", 100%, 70%)";
+    const place             = scoreData.filter( (u) => u.id === id )[0].place.toString();
+
+
     const storeData         = async (value) => {
         try {
             const jsonValue = JSON.stringify(value);
@@ -57,6 +62,9 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
             type: "increment",
             id: id,
             multiplier: multiplier,
+            globalData: {
+                higherScoreWins: globalData.higherScoreWins,
+            }
         });
 
         storeData(scoreData);
@@ -65,7 +73,7 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
     return (
         <View style={[styles.container, {backgroundColor: cardColor}]}>
             <View style={[styles.title, {backgroundColor: titleColor}]}>
-                <Text style={{flex: 1}}>{name}</Text>
+                <Text style={{flex: 1}}>{name + " " + place}</Text>
                 <View style={{flex: 8}}/>
                 <Pressable
                 onPress={() => goToPlayerScreen(id, name)}
