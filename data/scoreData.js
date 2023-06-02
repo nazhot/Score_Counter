@@ -44,7 +44,9 @@ export function useScoreDataDispatch() {
 
 
 function updatePlayersPlaces(scoreData, higherScoreWins){
-    const newData = [...scoreData];
+    scoreData.forEach( (element, index) => {
+        element.index = index;
+    });
 
     scoreData.sort( (a, b) => {
         return higherScoreWins ? b.score - a.score : a.score - b.score;
@@ -53,17 +55,19 @@ function updatePlayersPlaces(scoreData, higherScoreWins){
     let place = 1;
 
     for ( let i = 0; i < scoreData.length; i++ ) {
-        if ( i === 0 ) {
-            scoreData[i].place = 1;
-            newData[scoreData[i].id] = 1;
-            continue;
-        }
-        if ( scoreData[i - 1].score !== scoreData[i].score ){
+        if ( i !== 0 && scoreData[i - 1].score !== scoreData[i].score ){
             place++;
         }
         scoreData[i].place = place;
-        newData[scoreData[i].id] = place;
     }
+
+    scoreData.sort( (a, b) => {
+        return a.index - b.index;
+    });
+
+    scoreData.forEach( element => {
+        delete element.index;
+    });
 
     return scoreData;
 
