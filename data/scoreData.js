@@ -56,7 +56,9 @@ function updatePlayersPlaces(scoreData, higherScoreWins){
 
     for ( let i = 0; i < scoreData.length; i++ ) {
         if ( i !== 0 && scoreData[i - 1].score !== scoreData[i].score ){
-            place++;
+            scoreData[i].place = i + 1;
+            place = i + 1;
+            continue;
         }
         scoreData[i].place = place;
     }
