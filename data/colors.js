@@ -102,6 +102,33 @@ const colorThemes = {
             saturation: 100,
             lightness: 52,
         },
+    ],
+    mountains: [
+        {
+            hue: 74,
+            saturation: 32,
+            lightness: 32,
+        },
+        {
+            hue: 28,
+            saturation: 67,
+            lightness: 44,
+        },
+        {
+            hue: 52,
+            saturation: 94,
+            lightness: 94,
+        },
+        {
+            hue: 88,
+            saturation: 38,
+            lightness: 15,
+        },
+        {
+            hue: 32,
+            saturation: 65,
+            lightness: 62,
+        },
     ]
 }
 
