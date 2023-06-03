@@ -50,6 +50,58 @@ const colorThemes = {
             saturation: 98,
             lightness: 40,
         },
+    ],
+    autumn: [
+        {
+            hue: 231,
+            saturation: 82,
+            lightness: 6,
+        },
+        {
+            hue: 339,
+            saturation: 80,
+            lightness: 12,
+        },
+        {
+            hue: 354,
+            saturation: 93,
+            lightness: 22,
+        },
+        {
+            hue: 358,
+            saturation: 97,
+            lightness: 31,
+        },
+        {
+            hue: 0,
+            saturation: 100,
+            lightness: 41,
+        },
+        {
+            hue: 12,
+            saturation: 98,
+            lightness: 44,
+        },
+        {
+            hue: 23,
+            saturation: 97,
+            lightness: 46,
+        },
+        {
+            hue: 34,
+            saturation: 95,
+            lightness: 49,
+        },
+        {
+            hue: 39,
+            saturation: 96,
+            lightness: 50,
+        },
+        {
+            hue: 43,
+            saturation: 100,
+            lightness: 52,
+        },
     ]
 }
 

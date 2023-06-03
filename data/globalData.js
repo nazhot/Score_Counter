@@ -22,7 +22,7 @@ function getDefaultSettings(){
             startingResetValue: 5,
             nextId: 0,
             currentGame: "Rummy",
-            colorTheme: "default",
+            colorTheme: "autumn",
         }
     );
 }
