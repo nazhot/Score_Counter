@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         borderRadius: 10,
         overflow: "hidden",
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight: 10,
     }, 
     title: {
         height: 45,
@@ -48,7 +51,7 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
     const numColors         = colorTheme.length;
     const color             = colorTheme[id % numColors];
     const cardColor         = "hsl(" + color.hue + ", " + color.saturation + "%, " + color.lightness + "%)";
-    const titleColor        = "hsl(" + color.hue + ", " + color.saturation + "%, " + color.lightness * 1.2 + "%)";
+    const titleColor        = "hsl(" + color.hue + ", " + color.saturation + "%, " + color.lightness * 1.1 + "%)";
     const fontColor         = color.lightness > 50 ? "#000" : "#fff";
     const place             = scoreData.filter( (u) => u.id === id )[0].place.toString();
 
@@ -78,11 +81,11 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
     return (
         <View style={[styles.container, {backgroundColor: cardColor}]}>
             <View style={[styles.title, {backgroundColor: titleColor}]}>
-                <Text style={{flex: 1, color: fontColor}}>{name + " " + place}</Text>
+                <Text style={{flex: 2, color: fontColor, paddingLeft: 15}}>{name + " " + place}</Text>
                 <View style={{flex: 8}}/>
                 <Pressable
                 onPress={() => goToPlayerScreen(id, name)}
-                style={{flex: 1, direction: "rtl"}}>
+                style={{flex: 1, direction: "rtl", paddingRight: 15}}>
                     <FontAwesome
                         name="edit"
                         size={30}

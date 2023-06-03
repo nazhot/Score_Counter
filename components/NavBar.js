@@ -6,35 +6,39 @@ import { useGlobalData, useGlobalDataDispatch } from '../data/globalData';
 
 const iconSize         = 30;
 const textSize         = 18;
-const iconColor        = "#000"
-const containerPadding = 4;
+const iconColor        = "#ddd"
+const containerPadding = 10;
 
 const styles = StyleSheet.create({
     navbar: {
-        backgroundColor: "#aaa",
+        backgroundColor: "#333",
         flex: 1,
         flexDirection: "row",
+        color: "#fff",
+        padding: containerPadding,
     },
     winnerContainer: {
-        color: "#000",
-        flex: 2.5,
+        color: "#ddd",
+        flex: 1,
         flexDirection: "row",
         alignItems: "flex-end",
-        padding: containerPadding,
+        columnGap: 20,
     },
     text: {
         fontSize: textSize,
+        color: "#ddd",
+        margin: 5,
     },
     spacer: {
         flex: 4,
     },
     icons: {
-        flex: 3,
-        padding: containerPadding,
+        flex: 1,
         flexDirection: "row",
         columnGap: 20,
         alignItems: "flex-end",
-        justifyContent: "center",
+        justifyContent: "flex-end",
+        color: "#ddd",
     }
 });
 
@@ -68,16 +72,16 @@ const NavBar = ( ) => {
                         higherScoreWins: !higherScoreWins,
                     }
                 })}>
-                    <Text style={styles.text}>{winner}</Text>
-                    <FontAwesome
-                        name="star"
-                        size={iconSize}
-                        color={iconColor}
-                    />
+                    <View style={styles.winnerContainer}>
+                        <Text style={styles.text}>{winner}</Text>
+                        <FontAwesome
+                            name="star"
+                            size={iconSize}
+                            color={iconColor}
+                        />
+                    </View>
                 </Pressable>
             </View>
-
-            <View style={styles.spacer}></View>
 
             <View style={styles.icons}>
                 <Pressable

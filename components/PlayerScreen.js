@@ -7,6 +7,7 @@ import { useGlobalData } from '../data/globalData';
 const borderRadius = 10;
 const borderWidth = 2;
 const borderColor = "#b2cdf7";
+const padding = 10;
 
 const nameInputStyle = StyleSheet.create(
     {
@@ -18,6 +19,7 @@ const nameInputStyle = StyleSheet.create(
             borderColor,
             borderRadius,
             borderWidth,
+            padding,
         },
         text: {
             flex: 1,
@@ -35,6 +37,7 @@ const scoreInputStyle = StyleSheet.create(
             borderColor,
             borderRadius,
             borderWidth,
+            padding,
         },
         text: {
             flex: 1,
@@ -52,6 +55,7 @@ const incrementInputStyle = StyleSheet.create(
             borderColor,
             borderRadius,
             borderWidth,
+            padding,
         },
         text: {
             flex: 1,
@@ -99,7 +103,7 @@ const PlayerScreen = ( {navigation, route}) => {
     }
 
     return(
-        <View style={{flex: 1, backgroundColor: "#f1f"}}>
+        <View style={{flex: 1, backgroundColor: "#333"}}>
             <InputWithLabel
                 styles={nameInputStyle}
                 label="Name"

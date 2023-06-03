@@ -5,22 +5,23 @@ import { useGlobalData } from '../data/globalData';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#a02",
+        backgroundColor: "#333",
         flex: 1,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
+        padding: 10,
     },
     currentGame: {
-        flex: 3,
+        flex: 1,
         fontSize: 20,
-    },
-    spacer: {
-        flex: 6,
+        color: "#fff",
     },
     newGame: {
         flex: 1,
         fontSize: 10,
+        color: "#fff",
+        alignItems: "flex-end",
     }
 });
 
@@ -33,7 +34,6 @@ const BottomNav = ( {screens, goToNewGameScreen} ) => {
         style={styles.container}
         >
             <Text style={styles.currentGame}>{globalData.currentGame}</Text>
-            <View style={styles.spacer}/>
             <Pressable
                 onPress={goToNewGameScreen}
                 style={styles.newGame}
