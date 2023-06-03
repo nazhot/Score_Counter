@@ -1,4 +1,4 @@
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Button, Pressable } from 'react-native';
 import InputWithLabel from './InputWithLabel';
 import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
@@ -146,17 +146,26 @@ const PlayerScreen = ( {navigation, route}) => {
                 text={resetValue}
                 onTextChange={setResetValue}
             />
-            <FontAwesome
-                name="trash"
-                size={30}
-                color="#ff2222"
-            />
-            <View style={{flex: 1, padding: 10, justifyContent: "flex-end"}}>
-                <Button
-                    onPress={saveChanges}
-                    title="Save"
-                    color="#841583"
+            <Pressable
+                onPress={() => {
+                        scoreDataDispatch({type: "delete", id: playerData.id})
+                        navigation.navigate("Score");
+                    }
+                }
+                    
+            >
+                <FontAwesome
+                    name="trash"
+                    size={30}
+                    color="#ff2222"
                 />
+            </Pressable>
+            <View style={{flex: 1, padding: 10, justifyContent: "flex-end"}}>
+                    <Button
+                        onPress={saveChanges}
+                        title="Save"
+                        color="#841583"
+                    />
             </View>
 
 
