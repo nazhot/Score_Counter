@@ -14,8 +14,7 @@ const styles = StyleSheet.create({
  * Using the given data, create the ScoreCard components that will be within this ScoreContainer
  * @param {Array} data Array of object that define the various players and their scores
  */
-function generateScoreCards(goToPlayerScreen){
-    const scoreData  = useScoreData();
+function generateScoreCards(scoreData, goToPlayerScreen){
     const scoreCards = [];
     
     if ( scoreData.length === 0 ) {
@@ -39,12 +38,12 @@ function generateScoreCards(goToPlayerScreen){
 
 
 const ScoreContainer = ( {goToPlayerScreen} ) => {
-
+    const scoreData = useScoreData();
     return (
         <View
             style={styles.container}
         >
-            {generateScoreCards(goToPlayerScreen)}
+            {generateScoreCards(scoreData, goToPlayerScreen)}
         </View>
     );
 };

@@ -139,6 +139,12 @@ function scoreDataReducer(scoreData, action) {
             return scoreData.filter( u => u.id !== action.id );
         }
 
+        case "sort": {
+            return [...scoreData].sort( (a, b) => {
+                return action.globalData.higherScoreWins ? b.score - a.score : a.score - b.score;
+            })
+        }
+
         default: {
             throw Error('Unknown action: ' + action.type);
         }

@@ -110,11 +110,15 @@ const NavBar = ( ) => {
                         color={iconColor}
                     />
                 </Pressable>
-                <FontAwesome
-                    name="ellipsis-h"
-                    size={iconSize}
-                    color={iconColor}
-                />
+                <Pressable
+                    onPress={() => scoreDataDispatch({type: "sort", globalData: {higherScoreWins: globalData.higherScoreWins}})}
+                >
+                    <FontAwesome
+                        name="arrows-v"
+                        size={iconSize}
+                        color={iconColor}
+                    />
+                </Pressable>
             </View>
         </View>
     );
