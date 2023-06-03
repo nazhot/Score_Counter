@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useGlobalData } from '../data/globalData';
+import colorThemes from "../data/colors";
 
 const styles = StyleSheet.create({
     container: {
@@ -43,8 +44,12 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
     const scoreData         = useScoreData();
     const scoreDataDispatch = useScoreDataDispatch();
     const globalData        = useGlobalData();
-    const cardColor         = "hsl(" + hue + ", 100%, 50%)";
-    const titleColor        = "hsl(" + hue + ", 100%, 70%)";
+    const colorTheme        = colorThemes[globalData.colorTheme];
+    const numColors         = colorTheme.length;
+    const color             = colorTheme[id % numColors];
+    const cardColor         = "hsl(" + color.hue + ", " + color.saturation + "%, " + color.lightness + "%)";
+    const titleColor        = "hsl(" + color.hue + ", " + color.saturation + "%, " + color.lightness * 1.2 + "%)";
+    const fontColor         = color.lightness > 50 ? "#000" : "#fff";
     const place             = scoreData.filter( (u) => u.id === id )[0].place.toString();
 
 
@@ -73,7 +78,7 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
     return (
         <View style={[styles.container, {backgroundColor: cardColor}]}>
             <View style={[styles.title, {backgroundColor: titleColor}]}>
-                <Text style={{flex: 1}}>{name + " " + place}</Text>
+                <Text style={{flex: 1, color: fontColor}}>{name + " " + place}</Text>
                 <View style={{flex: 8}}/>
                 <Pressable
                 onPress={() => goToPlayerScreen(id, name)}
@@ -81,7 +86,7 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
                     <FontAwesome
                         name="edit"
                         size={30}
-                        color="#fff"
+                        color={fontColor}
                         
                     />
                 </Pressable>
@@ -90,14 +95,14 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
                 <Pressable 
                 onPress={() => increment(-1)}
                 style={styles.increment}>
-                    <Text >-</Text>
+                    <Text style={{color: fontColor}}>-</Text>
                 </Pressable>
 
-                <Text style={styles.score}>{score}</Text>
+                <Text style={[styles.score, {color: fontColor}]}>{score}</Text>
                 <Pressable 
                 onPress={() => increment(1)}
                 style={styles.increment}>
-                    <Text>+</Text>
+                    <Text style={{color: fontColor}}>+</Text>
                 </Pressable>
 
             </View>
