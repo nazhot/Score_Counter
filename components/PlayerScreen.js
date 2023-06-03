@@ -3,6 +3,7 @@ import InputWithLabel from './InputWithLabel';
 import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import { useGlobalData } from '../data/globalData';
+import { FontAwesome } from '@expo/vector-icons';
 
 const borderRadius = 10;
 const borderWidth = 2;
@@ -12,7 +13,7 @@ const padding = 10;
 const nameInputStyle = StyleSheet.create(
     {
         container: {
-            flex: 1,
+            height: 100,
         },
         input: {
             flex: 1,
@@ -20,9 +21,11 @@ const nameInputStyle = StyleSheet.create(
             borderRadius,
             borderWidth,
             padding,
+            color: "#ddd",
         },
         text: {
             flex: 1,
+            color: "#ddd",
         },
     }
 );
@@ -30,7 +33,7 @@ const nameInputStyle = StyleSheet.create(
 const scoreInputStyle = StyleSheet.create(
     {
         container: {
-            flex: 1,
+            height: 100,
         },
         input: {
             flex: 1,
@@ -38,9 +41,11 @@ const scoreInputStyle = StyleSheet.create(
             borderRadius,
             borderWidth,
             padding,
+            color: "#ddd",
         },
         text: {
             flex: 1,
+            color: "#ddd",
         },
     }
 );
@@ -48,7 +53,7 @@ const scoreInputStyle = StyleSheet.create(
 const incrementInputStyle = StyleSheet.create(
     {
         container: {
-            flex: 1,
+            height: 100,
         },
         input: {
             flex: 1,
@@ -56,9 +61,11 @@ const incrementInputStyle = StyleSheet.create(
             borderRadius,
             borderWidth,
             padding,
+            color: "#ddd",
         },
         text: {
             flex: 1,
+            color: "#ddd",
         },
     }
 );
@@ -66,10 +73,20 @@ const incrementInputStyle = StyleSheet.create(
 const resetInputStyle = StyleSheet.create(
     {
         container: {
-            flex: 1,
+            height: 100,
         },
-        input: {},
-        text: {},
+        input: {
+                       flex: 1,
+            borderColor,
+            borderRadius,
+            borderWidth,
+            padding,
+            color: "#ddd",
+        },
+        text: {
+            flex: 1,
+            color: "#ddd",
+        },
     }
 );
 
@@ -129,14 +146,20 @@ const PlayerScreen = ( {navigation, route}) => {
                 text={resetValue}
                 onTextChange={setResetValue}
             />
-            <View
-                styles={ { flex: 4} }
+            <FontAwesome
+                name="trash"
+                size={30}
+                color="#ff2222"
             />
-            <Button
-                onPress={saveChanges}
-                title="Save"
-                color="#841583"
-            />
+            <View style={{flex: 1, padding: 10, justifyContent: "flex-end"}}>
+                <Button
+                    onPress={saveChanges}
+                    title="Save"
+                    color="#841583"
+                />
+            </View>
+
+
         </View>
     );
 };
