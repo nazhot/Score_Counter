@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import { useGlobalData } from '../data/globalData';
 import { FontAwesome } from '@expo/vector-icons';
+import AreYouSure from './AreYouSure';
 
 const borderRadius = 10;
 const borderWidth = 2;
@@ -127,7 +128,6 @@ const PlayerScreen = ( {navigation, route}) => {
                 text={name}
                 onTextChange={setName}
             />
-            <View/>
             <InputWithLabel
                 styles={scoreInputStyle}
                 label="Score"
@@ -148,8 +148,8 @@ const PlayerScreen = ( {navigation, route}) => {
             />
             <Pressable
                 onPress={() => {
-                        scoreDataDispatch({type: "delete", id: playerData.id})
-                        navigation.navigate("Score");
+                        //scoreDataDispatch({type: "delete", id: playerData.id})
+                        navigation.navigate("AreYouSure");
                     }
                 }
                     
