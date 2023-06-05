@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   
 
 
-function AreYouSure( {navigation} ){
+function AreYouSure( {navigation, route} ){
     return(
         <View style={styles.centeredView}>
             <View style={styles.modalView}>
@@ -66,7 +66,10 @@ function AreYouSure( {navigation} ){
                       </Text>
                   </Pressable>
                   <Pressable
-                      onPress={()=> navigation.goBack()}
+                      onPress={()=> {
+                        navigation.goBack();
+                        route.params.confirmFunction();
+                      }}
                       style={ {flex: 1, alignItems: "center"} }
                   >
                       <Text>

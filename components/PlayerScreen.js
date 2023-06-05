@@ -103,6 +103,11 @@ const PlayerScreen = ( {navigation, route}) => {
     const [increment,  setIncrement]  = useState(playerData.increment.toString());
     const [resetValue, setResetValue] = useState(playerData.resetValue.toString());
 
+    function deletePlayer(){
+        scoreDataDispatch({type: "delete", id: playerData.id})
+        navigation.navigate("Score");
+    }
+
     function saveChanges(){
         scoreDataDispatch({
             type: "update",
@@ -148,8 +153,7 @@ const PlayerScreen = ( {navigation, route}) => {
             />
             <Pressable
                 onPress={() => {
-                        //scoreDataDispatch({type: "delete", id: playerData.id})
-                        navigation.navigate("AreYouSure");
+                        navigation.navigate("AreYouSure", {confirmFunction: deletePlayer});
                     }
                 }
                     
