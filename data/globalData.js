@@ -23,6 +23,7 @@ function getDefaultSettings(){
             nextId: 0,
             currentGame: "Rummy",
             colorTheme: "mountains",
+            nameTheme: "trees",
         }
     );
 }

@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import { useGlobalData, useGlobalDataDispatch } from '../data/globalData';
+import nameThemes from '../data/names';
 
 const iconSize         = 30;
 const textSize         = 18;
@@ -88,7 +89,7 @@ const NavBar = ( ) => {
                     onPress={() => {
                         scoreDataDispatch({
                             type: "add",
-                            name: "Test",
+                            name: nameThemes[globalData.nameTheme][globalData.nextId % nameThemes[globalData.nameTheme].length],
                             globalData: globalData,
                         });
                         globalDataDispatch({
