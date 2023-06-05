@@ -81,11 +81,10 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
     return (
         <View style={[styles.container, {backgroundColor: cardColor}]}>
             <View style={[styles.title, {backgroundColor: titleColor}]}>
-                <Text style={{flex: 2, color: fontColor, paddingLeft: 15}}>{name + " " + place}</Text>
-                <View style={{flex: 8}}/>
+                <Text style={{flex: 9, color: fontColor, paddingLeft: 15}}>{name + " " + place}</Text>
                 <Pressable
                 onPress={() => goToPlayerScreen(id, name)}
-                style={{flex: 1, direction: "rtl", paddingRight: 15}}>
+                style={{flex: 1, alignItems: "flex-end", paddingRight: 15}}>
                     <FontAwesome
                         name="edit"
                         size={30}
