@@ -73,14 +73,14 @@ const NavBar = ( ) => {
                         higherScoreWins: !higherScoreWins,
                     }
                 })}>
-                    <View style={styles.winnerContainer}>
+                    {scoreData.length > 0 && <View style={styles.winnerContainer}>
                         <Text style={styles.text}>{winner}</Text>
                         <FontAwesome
                             name="star"
                             size={iconSize}
                             color={iconColor}
                         />
-                    </View>
+                    </View>}
                 </Pressable>
             </View>
 

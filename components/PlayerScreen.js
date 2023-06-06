@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import { useGlobalData } from '../data/globalData';
 import { FontAwesome } from '@expo/vector-icons';
-import AreYouSure from './AreYouSure';
 
 const borderRadius = 10;
 const borderWidth = 2;
