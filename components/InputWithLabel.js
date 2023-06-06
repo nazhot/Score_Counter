@@ -16,7 +16,7 @@ function getInputComponent(value, onChange, style) {
                 <TextInput
                     style={style}
                     onChangeText={onChange}
-                    value={value}
+                    value={value.toString()}
                     inputMode="numeric"
                 />
             );

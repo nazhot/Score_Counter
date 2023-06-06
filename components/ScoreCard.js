@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     score: {
-        flex: 9,
+        flex: 2,
         flexDirection: "column",
         fontSize: 30,
         textAlign: "center",
@@ -70,6 +70,7 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, flattened} ) => {
         try {
             const jsonValue = JSON.stringify(value);
             await AsyncStorage.setItem("@lastGameData", jsonValue);
+            console.log("Stored score data");
         } catch(e){
             console.log(e);
         }
@@ -93,9 +94,9 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, flattened} ) => {
             <View style={[styles.flattenedContainer, {backgroundColor: cardColor}]}>
                 <Pressable
                     onPress={() => goToPlayerScreen(id, name)}
-                    style={{flex: 1, alignItems: "flex-end", paddingRight: 15}}
+                    style={{flex: 6, alignItems: "center", textAlignVertical: "center", paddingRight: 15}}
                 >
-                    <Text style={{flex: 9, color: fontColor, paddingLeft: 15}}>{name + " " + place}</Text>
+                    <Text style={{flex: 1, textAlignVertical: "center", color: fontColor, fontSize: 20, paddingLeft: 15}}>{name + " " + place}</Text>
                 </Pressable>
                 <View style={styles.scoreContainer}>
                     <Pressable 

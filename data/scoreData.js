@@ -8,6 +8,8 @@ const ScoreDataDispatchContext = createContext(null);
 const getLastScore = async () => {
     try {
         const  jsonValue = await AsyncStorage.getItem("@lastGameStore");
+        console.log("Grabbed last score data");
+        console.log(jsonValue);
         return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch(e) {
         console.log(e);
