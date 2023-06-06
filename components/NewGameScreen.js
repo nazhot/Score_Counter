@@ -63,8 +63,8 @@ function createGameSettingsComponents(game, gamesSettings, setGamesSettings){
         components.push(
             <InputWithLabel
                 label={settingName}
-                text={settingValue}
-                onTextChange={(text) => setGamesSettings(game, settingName, text)}
+                value={settingValue}
+                onChange={(text) => setGamesSettings(game, settingName, text)}
                 key={count}
                 styles={inputStyles}
             />

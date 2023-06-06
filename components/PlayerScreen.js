@@ -130,26 +130,26 @@ const PlayerScreen = ( {navigation, route}) => {
             <InputWithLabel
                 styles={nameInputStyle}
                 label="Name"
-                text={name}
-                onTextChange={setName}
+                value={name}
+                onChange={setName}
             />
             <InputWithLabel
                 styles={scoreInputStyle}
                 label="Score"
-                text={score}
-                onTextChange={setScore}
+                value={score}
+                onChange={setScore}
             />
             <InputWithLabel
                 styles={incrementInputStyle}
                 label="Increment"
-                text={increment}
-                onTextChange={setIncrement}
+                value={increment}
+                onChange={setIncrement}
             />
             <InputWithLabel
                 styles={resetInputStyle}
                 label="Reset Value"
-                text={resetValue}
-                onTextChange={setResetValue}
+                value={resetValue}
+                onChange={setResetValue}
             />
             <Pressable
                 onPress={() => {
