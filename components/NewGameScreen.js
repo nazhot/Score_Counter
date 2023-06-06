@@ -9,6 +9,7 @@ import { useState } from "react";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#333",
     },
     topPanel: {
         flex: 1,
@@ -27,9 +28,17 @@ const styles = StyleSheet.create({
 const inputStyles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
     },
     input: {
         flex: 1,
+        borderColor: "#BFDBF7",
+        borderWidth: 2,
+        borderRadius: 10,
+        padding: 10,
+
     },
     text: {
         flex: 1,

@@ -23,7 +23,7 @@ function getInputComponent(value, onChange, style) {
         case "boolean":
             return (
                 <Switch
-                style={style}
+                style={[style, {borderWidth: 0, padding: 0}]}
                 value={value}
                 onValueChange={onChange}
                 />
