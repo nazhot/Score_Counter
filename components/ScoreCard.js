@@ -16,6 +16,16 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
     }, 
+    flattenedContainer: {
+        height: 100,
+        flexDirection: "row",
+        borderRadius: 10,
+        overflow: "hidden",
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        alignItems: "center",
+    }, 
     title: {
         height: 45,
         flexDirection: "row",
@@ -42,7 +52,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
+const ScoreCard = ( {name, score, id, goToPlayerScreen, flattened} ) => {
 
     const scoreData         = useScoreData();
     const scoreDataDispatch = useScoreDataDispatch();
@@ -76,6 +86,34 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, hue} ) => {
         });
 
         storeData(scoreData);
+    }
+
+    if (flattened){
+        return (
+            <View style={[styles.flattenedContainer, {backgroundColor: cardColor}]}>
+                <Pressable
+                    onPress={() => goToPlayerScreen(id, name)}
+                    style={{flex: 1, alignItems: "flex-end", paddingRight: 15}}
+                >
+                    <Text style={{flex: 9, color: fontColor, paddingLeft: 15}}>{name + " " + place}</Text>
+                </Pressable>
+                <View style={styles.scoreContainer}>
+                    <Pressable 
+                    onPress={() => increment(-1)}
+                    style={styles.increment}>
+                        <Text style={{color: fontColor}}>-</Text>
+                    </Pressable>
+    
+                    <Text style={[styles.score, {color: fontColor}]}>{score}</Text>
+                    <Pressable 
+                    onPress={() => increment(1)}
+                    style={styles.increment}>
+                        <Text style={{color: fontColor}}>+</Text>
+                    </Pressable>
+    
+                </View>
+            </View>
+        );
     }
 
     return (

@@ -28,7 +28,7 @@ function generateScoreCards(scoreData, goToPlayerScreen){
                 id={playerData.id}
                 score={playerData.score.toString()}
                 key={playerData.id}
-                hue={"167"}
+                flattened={scoreData.length > 5}
                 goToPlayerScreen={goToPlayerScreen}
             />
         );
