@@ -1,7 +1,8 @@
 import { React } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import ScoreCard from './ScoreCard';
 import { useScoreData } from '../data/scoreData';
+import DraggableFlatList from 'react-native-draggable-flatlist';
 
 const styles = StyleSheet.create({
     container: {
@@ -39,6 +40,32 @@ function generateScoreCards(scoreData, goToPlayerScreen){
 
 const ScoreContainer = ( {goToPlayerScreen} ) => {
     const scoreData = useScoreData();
+
+    const showFlattened = scoreData.length > 5;
+
+    if (showFlattened){
+        return (
+            <View 
+                style={styles.container}
+            >
+                <FlatList
+                    data={scoreData}
+                    renderItem={ ({item}) => (
+                        <ScoreCard
+                            name={item.name}
+                            id={item.id}
+                            score={item.score.toString()}
+                            key={item.id}
+                            flattened={true}
+                            goToPlayerScreen={goToPlayerScreen}
+                        />
+                    )}
+                />
+            </View>
+    
+        );
+    }
+
     return (
         <View
             style={styles.container}
@@ -46,6 +73,8 @@ const ScoreContainer = ( {goToPlayerScreen} ) => {
             {generateScoreCards(scoreData, goToPlayerScreen)}
         </View>
     );
+
+
 };
 
 export default ScoreContainer;
