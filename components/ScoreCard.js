@@ -2,7 +2,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { React } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storeData } from '../data/asyncStorage';
 import { useGlobalData } from '../data/globalData';
 import colorThemes from "../data/colors";
 
@@ -65,16 +65,6 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, flattened} ) => {
     const fontColor         = color.lightness > 50 ? "#000" : "#fff";
     const place             = scoreData.filter( (u) => u.id === id )[0].place.toString();
 
-
-    const storeData         = async (value) => {
-        try {
-            const jsonValue = JSON.stringify(value);
-            await AsyncStorage.setItem("@lastGameData", jsonValue);
-            console.log("Stored score data");
-        } catch(e){
-            console.log(e);
-        }
-    }
 
     function increment(multiplier){
         scoreDataDispatch({

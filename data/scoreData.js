@@ -1,39 +1,40 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useContext, createContext, useReducer } from "react";
-import { GlobalProvider, useGlobalData } from "./globalData";
+import { useContext, createContext, useReducer, useEffect } from "react";
+import { GlobalProvider } from "./globalData";
 
 const ScoreDataContext = createContext(null);
 const ScoreDataDispatchContext = createContext(null);
 
-const getLastScore = async () => {
-    try {
-        const  jsonValue = await AsyncStorage.getItem("@lastGameStore");
-        console.log("Grabbed last score data");
-        console.log(jsonValue);
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch(e) {
-        console.log(e);
-    }
-}
-
-let lastScore = getLastScore();
-if (!Array.isArray(lastScore)) {
-    lastScore = [];
-}
 
 export function UserProvider( { children } ){
-    const [scoreData, scoreDispatch] = useReducer(scoreDataReducer, lastScore);
+    const [scoreData, scoreDispatch] = useReducer(scoreDataReducer, []);
 
-      return (
-        <GlobalProvider>
-            <ScoreDataContext.Provider value={scoreData}>
-                <ScoreDataDispatchContext.Provider value={scoreDispatch}>
-                    {children}
-                </ScoreDataDispatchContext.Provider>
-            </ScoreDataContext.Provider>
-        </GlobalProvider>
+    const getLastScore = async () => {
+        try {
+            const jsonValue = await AsyncStorage.getItem("@lastGameData");
+            const lastScore = jsonValue != null ? JSON.parse(jsonValue) : [];
+            console.log(lastScore);
+            scoreDispatch( { type: "set", data: lastScore } );
+        } catch(e) {
+            console.log(e);
+        }
+    }
 
-      );
+    useEffect( () => {
+        getLastScore();
+    }, []);
+
+
+    return (
+    <GlobalProvider>
+        <ScoreDataContext.Provider value={scoreData}>
+            <ScoreDataDispatchContext.Provider value={scoreDispatch}>
+                {children}
+            </ScoreDataDispatchContext.Provider>
+        </ScoreDataContext.Provider>
+    </GlobalProvider>
+
+    );
 }
 
 export function useScoreData() {
@@ -145,6 +146,10 @@ function scoreDataReducer(scoreData, action) {
             return [...scoreData].sort( (a, b) => {
                 return action.globalData.higherScoreWins ? b.score - a.score : a.score - b.score;
             })
+        }
+
+        case "set": {
+            return action.data;
         }
 
         default: {
