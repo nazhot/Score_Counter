@@ -2,7 +2,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import { React } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
-import { storeData } from '../data/asyncStorage';
 import { useGlobalData } from '../data/globalData';
 import colorThemes from "../data/colors";
 
@@ -75,8 +74,6 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, flattened} ) => {
                 higherScoreWins: globalData.higherScoreWins,
             }
         });
-
-        storeData(scoreData);
     }
 
     if (flattened){

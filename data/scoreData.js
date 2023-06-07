@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext, createContext, useReducer, useEffect } from "react";
 import { GlobalProvider } from "./globalData";
+import { storeData } from "./asyncStorage";
 
 const ScoreDataContext = createContext(null);
 const ScoreDataDispatchContext = createContext(null);
@@ -139,13 +140,13 @@ function scoreDataReducer(scoreData, action) {
         }
 
         case "delete": {
-            return scoreData.filter( u => u.id !== action.id );
+            newData = scoreData.filter( u => u.id !== action.id );
+            break;
         }
 
         case "sort": {
-            return [...scoreData].sort( (a, b) => {
-                return action.globalData.higherScoreWins ? b.score - a.score : a.score - b.score;
-            })
+            newData = scoreData;
+            break;
         }
 
         case "set": {
@@ -156,5 +157,6 @@ function scoreDataReducer(scoreData, action) {
             throw Error('Unknown action: ' + action.type);
         }
     }
+    storeData(newData);
     return updatePlayersPlaces(newData, action.globalData.higherScoreWins);
 }

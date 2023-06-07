@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import { useGlobalData } from '../data/globalData';
 import { FontAwesome } from '@expo/vector-icons';
-import { storeData } from '../data/asyncStorage';
 
 const borderRadius = 10;
 const borderWidth = 2;
@@ -104,8 +103,7 @@ const PlayerScreen = ( {navigation, route}) => {
     const [resetValue, setResetValue] = useState(playerData.resetValue.toString());
 
     function deletePlayer(){
-        scoreDataDispatch({type: "delete", id: playerData.id})
-        storeData(scoreData);
+        scoreDataDispatch({type: "delete", id: playerData.id, globalData: {higherScoreWins: globalData.higherScoreWins}})
         navigation.navigate("Score");
     }
 
@@ -123,7 +121,6 @@ const PlayerScreen = ( {navigation, route}) => {
                 higherScoreWins: globalData.higherScoreWins,
             }
         });
-        storeData(scoreData);
         navigation.navigate("Score");
     }
 

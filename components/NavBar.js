@@ -4,7 +4,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useScoreData, useScoreDataDispatch } from '../data/scoreData';
 import { useGlobalData, useGlobalDataDispatch } from '../data/globalData';
 import nameThemes from '../data/names';
-import { storeData } from '../data/asyncStorage';
 
 const iconSize         = 30;
 const textSize         = 18;
@@ -97,9 +96,9 @@ const NavBar = ( ) => {
                             type: "update", 
                             newSettings: {
                                 nextId: globalData.nextId + 1,
-                            }
+                            },
+                            globalData: {higherScoreWins: globalData.higherScoreWins}
                         });
-                        storeData(scoreData);
                     }}
                 >
                     <FontAwesome
@@ -111,7 +110,6 @@ const NavBar = ( ) => {
                 <Pressable
                     onPress={() => {
                         scoreDataDispatch({type: "resetAll", globalData: {higherScoreWins: globalData.higherScoreWins}})
-                        storeData(scoreData);
                     }}
                 >
                     <FontAwesome
@@ -123,7 +121,6 @@ const NavBar = ( ) => {
                 <Pressable
                     onPress={() => {
                             scoreDataDispatch({type: "sort", globalData: {higherScoreWins: globalData.higherScoreWins}});
-                            storeData(scoreData);
                         }
                     }
                 >
