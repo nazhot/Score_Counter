@@ -1,42 +1,44 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useContext, createContext, useReducer } from "react";
+import { useContext, createContext, useReducer, useEffect } from "react";
 
 const GlobalDataContext = createContext(null);
 const GlobalDataDispatchContext = createContext(null);
 
-const getLastSettings = async () => {
-    try {
-        const  jsonValue = await AsyncStorage.getItem("@lastGameSettings");
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch(e) {
-        console.log(e);
-    }
-}
 
-function getDefaultSettings(){
-    return(
-        {
-            startingIncrement: 5,
-            higherScoreWins: true,
-            sortPlayers: false,
-            startingResetValue: 5,
-            nextId: 0,
-            currentGame: "Rummy",
-            colorTheme: "mountains",
-            nameTheme: "trees",
-        }
-    );
-}
 
-// let lastSettings = getLastSettings();
-// if ( lastSettings["increment"] === null ) {
-//     lastSettings = getDefaultSettings();
-// }
-
-const lastSettings = getDefaultSettings();
 
 export function GlobalProvider( { children } ){
-    const [globalData, globalDispatch] = useReducer(globalDataReducer, lastSettings);
+    const [globalData, globalDispatch] = useReducer(globalDataReducer, {});
+
+    const getLastSettings = async () => {
+        try {
+            const  jsonValue = await AsyncStorage.getItem("@lastGlobalData");
+            const lastSettings = jsonValue != null ? JSON.parse(jsonValue) : getDefaultSettings();
+            console.log(lastSettings);
+            globalDispatch({type: "update", newSettings: lastSettings})
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    useEffect( () => {
+        getLastSettings();
+    }, []);
+    function getDefaultSettings(){
+        return(
+            {
+                startingIncrement: 5,
+                higherScoreWins: true,
+                sortPlayers: false,
+                startingResetValue: 5,
+                nextId: 0,
+                currentGame: "Rummy",
+                colorTheme: "mountains",
+                nameTheme: "trees",
+            }
+        );
+    }
+    
 
       return (
         <GlobalDataContext.Provider value={globalData}>

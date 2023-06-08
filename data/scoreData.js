@@ -157,6 +157,6 @@ function scoreDataReducer(scoreData, action) {
             throw Error('Unknown action: ' + action.type);
         }
     }
-    storeData(newData);
+    storeData("@lastGameData", newData);
     return updatePlayersPlaces(newData, action.globalData.higherScoreWins);
 }
