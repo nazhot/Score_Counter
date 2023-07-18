@@ -4,6 +4,7 @@ import { useGlobalData, useGlobalDataDispatch } from "../data/globalData";
 import { useScoreDataDispatch } from "../data/scoreData";
 import gameSettings from "../data/games";
 import { useState } from "react";
+import { storeData } from "../data/asyncStorage";
 
 
 const styles = StyleSheet.create({
@@ -104,16 +105,19 @@ const NewGameScreen = ( { navigation, routes } ) => {
 
     function createNewGame() {
         const currentGameSettings = gamesSettings[game];
+        const newSettings = {
+            currentGame: game,
+            startingResetValue: parseInt(currentGameSettings.resetValue),
+            startingIncrement:  parseInt(currentGameSettings.increment),
+            higherScoreWins:    currentGameSettings.higherScoreWins.toString() === "true",
+        };
 
         globalDataDispatch({
             type: "update",
-            newSettings: {
-                currentGame: game,
-                startingResetValue: parseInt(currentGameSettings.resetValue),
-                startingIncrement:  parseInt(currentGameSettings.increment),
-                higherScoreWins:    currentGameSettings.higherScoreWins.toString() === "true",
-            }
+            newSettings,
         });
+
+        storeData("@lastGlobalData", {...globalData, ...newSettings});
 
         const newData = {
             increment:  parseInt(currentGameSettings.increment),

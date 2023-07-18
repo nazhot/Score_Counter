@@ -33,7 +33,7 @@ export function GlobalProvider( { children } ){
                 startingResetValue: 5,
                 nextId: 0,
                 currentGame: "Rummy",
-                colorTheme: "mountains",
+                colorTheme: "autumn",
                 nameTheme: "trees",
             }
         );
