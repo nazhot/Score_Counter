@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const NavBar = ( ) => {
+const NavBar = ( {navigation} ) => {
 
     const scoreData          = useScoreData();
     const scoreDataDispatch  = useScoreDataDispatch();
@@ -59,6 +59,10 @@ const NavBar = ( ) => {
             winner      = scoreData[i].name;
             winnerScore = scoreData[i].score;
         }
+    }
+
+    function resetAll(){
+        scoreDataDispatch({type: "resetAll", globalData: {higherScoreWins: globalData.higherScoreWins}});
     }
 
     return (
@@ -109,7 +113,7 @@ const NavBar = ( ) => {
                 </Pressable>
                 <Pressable
                     onPress={() => {
-                        scoreDataDispatch({type: "resetAll", globalData: {higherScoreWins: globalData.higherScoreWins}})
+                        navigation.navigate("AreYouSure", {confirmFunction: resetAll});
                     }}
                 >
                     <FontAwesome

@@ -15,7 +15,7 @@ const ScoreScreen = ( {navigation} ) => {
 
     return (
         <SafeAreaView style={styles.container}>
-        <NavBar/>
+        <NavBar navigation={navigation}/>
         <ScoreContainer
           goToPlayerScreen={goToPlayerScreen}
         >
