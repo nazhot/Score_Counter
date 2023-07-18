@@ -1,4 +1,4 @@
-import { Alert, Pressable, StyleSheet, Text } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, Touchable } from "react-native";
 import { View } from "react-native";
 
 
@@ -50,9 +50,28 @@ const styles = StyleSheet.create({
 
 
 function AreYouSure( {navigation, route} ){
+
+    let popupDims;
+
     return(
+      <Pressable
+        style={styles.centeredView}
+        onPress={(event)=> {
+          let x = event.nativeEvent.pageX;
+          let y = event.nativeEvent.pageY;
+          if ( x < popupDims.x || x > ( popupDims.x + popupDims.width )||
+               y < popupDims.y || y > ( popupDims.y + popupDims.height ) ) {
+            navigation.goBack();
+          }
+        }}
+      >
         <View style={styles.centeredView}>
-            <View style={styles.modalView}>
+            <View style={styles.modalView}
+                  onLayout={(event) => {
+                    popupDims = event.nativeEvent.layout;
+                    console.log(popupDims.x);
+                  }}  
+            >
                 <Text style={ { flex: 5 } }>
                     Are you sure?
                 </Text>
@@ -80,6 +99,7 @@ function AreYouSure( {navigation, route} ){
 
             </View>
         </View>
+      </Pressable>
     )
 }
 
