@@ -56,7 +56,7 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, flattened} ) => {
     const scoreData         = useScoreData();
     const scoreDataDispatch = useScoreDataDispatch();
     const globalData        = useGlobalData();
-    const colorTheme        = colorThemes[globalData.colorTheme];
+    const colorTheme        = colorThemes[globalData.themeSettings.colorTheme];
     const numColors         = colorTheme.length;
     const color             = colorTheme[id % numColors];
     const cardColor         = "hsl(" + color.hue + ", " + color.saturation + "%, " + color.lightness + "%)";
@@ -71,7 +71,7 @@ const ScoreCard = ( {name, score, id, goToPlayerScreen, flattened} ) => {
             id: id,
             multiplier: multiplier,
             globalData: {
-                higherScoreWins: globalData.higherScoreWins,
+                gameSettings: {higherScoreWins: globalData.gameSettings.higherScoreWins },
             }
         });
     }

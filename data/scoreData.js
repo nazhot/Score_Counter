@@ -13,7 +13,7 @@ export function UserProvider( { children } ){
     const getLastScore = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem("@lastGameData");
-            const lastScore = jsonValue != null ? JSON.parse(jsonValue) : [];
+            const lastScore = []; //jsonValue != null ? JSON.parse(jsonValue) : [];
             console.log(lastScore);
             scoreDispatch( { type: "set", data: lastScore } );
         } catch(e) {
@@ -81,14 +81,15 @@ function updatePlayersPlaces(scoreData, higherScoreWins){
 
 function scoreDataReducer(scoreData, action) {
     let newData;
+    console.log(action.globalData);
     switch ( action.type ) {
         case "add": {
             newData = [...scoreData, {
-                id: action.globalData.nextId,
+                id: action.globalData.gameSettings.nextId,
                 name: action.name,
-                score: action.globalData.startingResetValue,
-                increment: action.globalData.startingIncrement,
-                resetValue: action.globalData.startingResetValue,
+                score: action.globalData.gameSettings.startingResetValue,
+                increment: action.globalData.gameSettings.startingIncrement,
+                resetValue: action.globalData.gameSettings.startingResetValue,
                 place: 0,
             }];
             break;
@@ -158,5 +159,5 @@ function scoreDataReducer(scoreData, action) {
         }
     }
     storeData("@lastGameData", newData);
-    return updatePlayersPlaces(newData, action.globalData.higherScoreWins);
+    return updatePlayersPlaces(newData, action.globalData.gameSettings.higherScoreWins);
 }

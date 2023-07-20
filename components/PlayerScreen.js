@@ -103,7 +103,7 @@ const PlayerScreen = ( {navigation, route}) => {
     const [resetValue, setResetValue] = useState(playerData.resetValue.toString());
 
     function deletePlayer(){
-        scoreDataDispatch({type: "delete", id: playerData.id, globalData: {higherScoreWins: globalData.higherScoreWins}})
+        scoreDataDispatch({type: "delete", id: playerData.id, globalData: { gameSettings: {higherScoreWins: globalData.gameSettings.higherScoreWins}}})
         navigation.navigate("Score");
     }
 
@@ -118,7 +118,7 @@ const PlayerScreen = ( {navigation, route}) => {
                 resetValue: parseInt(resetValue),
             },
             globalData: {
-                higherScoreWins: globalData.higherScoreWins,
+                gameSettings: {higherScoreWins: globalData.gameSettings.higherScoreWins},
             }
         });
         navigation.navigate("Score");

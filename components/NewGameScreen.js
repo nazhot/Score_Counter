@@ -90,7 +90,7 @@ const NewGameScreen = ( { navigation, routes } ) => {
     const globalData          = useGlobalData();
     const globalDataDispatch  = useGlobalDataDispatch();
     const scoreDataDispatch   = useScoreDataDispatch();
-    const [game, setGame]     = useState(globalData.currentGame);
+    const [game, setGame]     = useState(globalData.gameSettings.currentGame);
     const [gamesSettings, setGamesSettings] = useState({...gameSettings});
 
     function editGameSettings(gameName, settingName, settingValue){
@@ -113,7 +113,7 @@ const NewGameScreen = ( { navigation, routes } ) => {
         };
 
         globalDataDispatch({
-            type: "update",
+            type: "updateGame",
             newSettings,
         });
 
@@ -124,7 +124,7 @@ const NewGameScreen = ( { navigation, routes } ) => {
             resetValue: parseInt(currentGameSettings.resetValue),
         }
 
-        if ( game !== globalData.currentGame ) {
+        if ( game !== globalData.gameSettings.currentGame ) {
             newData.score = parseInt(currentGameSettings.resetValue);
             writeToLog();
         }
@@ -132,7 +132,7 @@ const NewGameScreen = ( { navigation, routes } ) => {
             type: "updateAll",
             newData,
             globalData: {
-                higherScoreWins: globalData.higherScoreWins,
+                gameSettings: {higherScoreWins: globalData.gameSettings.higherScoreWins},
             }
         });
         navigation.navigate("Score");

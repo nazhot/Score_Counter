@@ -13,9 +13,9 @@ export function GlobalProvider( { children } ){
     const getLastSettings = async () => {
         try {
             const  jsonValue = await AsyncStorage.getItem("@lastGlobalData");
-            const lastSettings = jsonValue != null ? JSON.parse(jsonValue) : getDefaultSettings();
+            const lastSettings = getDefaultSettings(); //jsonValue != null ? JSON.parse(jsonValue) : getDefaultSettings();
             console.log(lastSettings);
-            globalDispatch({type: "update", newSettings: lastSettings})
+            globalDispatch({type: "set", newSettings: lastSettings})
         } catch(e) {
             console.log(e);
         }
@@ -27,14 +27,19 @@ export function GlobalProvider( { children } ){
     function getDefaultSettings(){
         return(
             {
-                startingIncrement: 5,
-                higherScoreWins: true,
-                sortPlayers: false,
-                startingResetValue: 5,
-                nextId: 0,
-                currentGame: "Rummy",
-                colorTheme: "autumn",
-                nameTheme: "trees",
+                gameSettings: {
+                    startingIncrement: 5,
+                    higherScoreWins: true,
+                    sortPlayers: false,
+                    startingResetValue: 5,
+                    nextId: 0,
+                    currentGame: "Rummy",
+                },
+                
+                themeSettings: {
+                    colorTheme: "autumn",
+                    nameTheme: "trees",
+                }
             }
         );
     }
@@ -59,10 +64,26 @@ export function useGlobalDataDispatch() {
 
 function globalDataReducer(globalData, action) {
     switch ( action.type ) {
-        case "update": {
+        case "set": {
             const newData = {
                 ...globalData,
-                ...action.newSettings
+                ...action.newSettings,
+            };
+            return newData;
+        }
+
+        case "updateGame": {
+            const newData = {
+                ...globalData,
+                gameSettings: {...globalData.gameSettings, ...action.newSettings},
+            };
+            return newData;
+        }
+
+        case "updateTheme": {
+            const newData = {
+                ...globalData,
+                themeSettings: {...globalData.themeSettings, ...action.newSettings},
             };
             return newData;
         }

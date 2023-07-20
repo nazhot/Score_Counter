@@ -33,7 +33,7 @@ const BottomNav = ( {screens, goToNewGameScreen} ) => {
         <View
         style={styles.container}
         >
-            <Text style={styles.currentGame}>{globalData.currentGame}</Text>
+            <Text style={styles.currentGame}>{globalData.gameSettings?.currentGame}</Text>
             <Pressable
                 onPress={goToNewGameScreen}
                 style={styles.newGame}

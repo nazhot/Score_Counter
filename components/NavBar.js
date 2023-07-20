@@ -49,7 +49,7 @@ const NavBar = ( {navigation} ) => {
     const scoreDataDispatch  = useScoreDataDispatch();
     const globalData         = useGlobalData();
     const globalDataDispatch = useGlobalDataDispatch();
-    const higherScoreWins    = globalData.higherScoreWins;
+    const higherScoreWins    = globalData.gameSettings?.higherScoreWins;
     let   winner             = "";
     let   winnerScore        = higherScoreWins ? -30000: 30000;
 
@@ -62,7 +62,7 @@ const NavBar = ( {navigation} ) => {
     }
 
     function resetAll(){
-        scoreDataDispatch({type: "resetAll", globalData: {higherScoreWins: globalData.higherScoreWins}});
+        scoreDataDispatch({type: "resetAll", globalData: { gameSettings: {higherScoreWins: globalData.gameSettings.higherScoreWins}}});
     }
 
     return (
@@ -72,7 +72,7 @@ const NavBar = ( {navigation} ) => {
             <View style={styles.winnerContainer}>
                 <Pressable
                 onPress={() => globalDataDispatch({
-                    type: "update",
+                    type: "updateGame",
                     newSettings: {
                         higherScoreWins: !higherScoreWins,
                     }
@@ -93,15 +93,15 @@ const NavBar = ( {navigation} ) => {
                     onPress={() => {
                         scoreDataDispatch({
                             type: "add",
-                            name: nameThemes[globalData.nameTheme][globalData.nextId % nameThemes[globalData.nameTheme].length],
+                            name: nameThemes[globalData.themeSettings.nameTheme][globalData.gameSettings.nextId % nameThemes[globalData.themeSettings.nameTheme].length],
                             globalData: globalData,
                         });
                         globalDataDispatch({
-                            type: "update", 
+                            type: "updateGame", 
                             newSettings: {
-                                nextId: globalData.nextId + 1,
+                                nextId: globalData.gameSettings.nextId + 1,
                             },
-                            globalData: {higherScoreWins: globalData.higherScoreWins}
+                            //globalData: {higherScoreWins: globalData.gameSettings.higherScoreWins}
                         });
                     }}
                 >
@@ -124,7 +124,7 @@ const NavBar = ( {navigation} ) => {
                 </Pressable>
                 <Pressable
                     onPress={() => {
-                            scoreDataDispatch({type: "sort", globalData: {higherScoreWins: globalData.higherScoreWins}});
+                            scoreDataDispatch({type: "sort", globalData: { gameSettings: {higherScoreWins: globalData.gameSettings.higherScoreWins }}});
                         }
                     }
                 >

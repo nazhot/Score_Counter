@@ -6,7 +6,10 @@ import { useGlobalData, useGlobalDataDispatch } from "../data/globalData";
 const SettingsScreen = ( { navigation, routes } ) => {
     return(
         <View>
-
+            <InputWithLabel
+                styles={{}}
+                label={""}
+            />
         </View>
     );
 }
