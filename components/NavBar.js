@@ -134,6 +134,18 @@ const NavBar = ( {navigation} ) => {
                         color={iconColor}
                     />
                 </Pressable>
+                <Pressable
+                    onPress={() => {
+                            navigation.navigate("Settings");
+                        }
+                    }
+                >
+                    <FontAwesome
+                        name="gear"
+                        size={iconSize}
+                        color={iconColor}
+                    />
+                </Pressable>
             </View>
         </View>
     );

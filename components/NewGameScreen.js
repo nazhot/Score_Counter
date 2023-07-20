@@ -44,7 +44,7 @@ const inputStyles = StyleSheet.create({
     text: {
         flex: 1,
     }
-})
+});
 
 function createGameNameComponents(game, setGame){
     const gameButtons = [];
@@ -95,8 +95,8 @@ const NewGameScreen = ( { navigation, routes } ) => {
 
     function editGameSettings(gameName, settingName, settingValue){
         const newGamesSettings = {...gamesSettings};
-
               newGamesSettings[gameName][settingName] = settingValue;
+              
         setGamesSettings(newGamesSettings);
     }
 
