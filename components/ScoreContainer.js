@@ -3,11 +3,13 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import ScoreCard from './ScoreCard';
 import { useScoreData } from '../data/scoreData';
 import DraggableFlatList from 'react-native-draggable-flatlist';
+import CheckBoxColumn from './CheckBoxColumn';
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#333",
         flex: 9,
+        flexDirection: "row",
     }
 });
 
@@ -70,7 +72,13 @@ const ScoreContainer = ( {goToPlayerScreen} ) => {
         <View
             style={styles.container}
         >
-            {generateScoreCards(scoreData, goToPlayerScreen)}
+            <View style={{flex: 1}}>
+                <CheckBoxColumn number={1}/>
+            </View>
+            <View style={{flex: 9}}>
+                {generateScoreCards(scoreData, goToPlayerScreen)}
+            </View>
+
         </View>
     );
 
